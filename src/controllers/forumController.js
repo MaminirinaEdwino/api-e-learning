@@ -1,0 +1,74 @@
+const forumRepo = require('../repositories/forumRepository');
+const postRepo = require('../repositories/postRepository');
+const coursRepo = require('../repositories/coursRepository');
+
+class ForumController {
+    
+    // --- CRÉATION D'UN FORUM ---
+    async createForum(req, res) {
+        try {
+            const { titre, description, cours_id } = req.body;
+            
+            // Insertion via le repository
+            await forumRepo.insert({
+                cours_id: parseInt(cours_id),
+                titre: titre.trim(),
+                description: description ? description.trim() : ''
+            });
+
+            res.redirect('/espace/apprenant');
+        } catch (error) {
+            console.error("Erreur création forum:", error);
+            res.status(500).send("Erreur lors de la création du forum.");
+        }
+    }
+
+    // --- VUE FORMATEUR : FORUMS D'UN COURS ---
+    async listForumsByCours(req, res) {
+        const cours_id = parseInt(req.params.id);
+        const formateur_id = req.session.formateur_id;
+
+        try {
+            const cours = await coursRepo.getFormateurCours(cours_id, formateur_id);
+            const forums = await forumRepo.getByCoursId(cours_id);
+
+            // Récupération des posts avec indicateur formateur
+            const posts = {};
+            await Promise.all(forums.map(async (forum) => {
+                posts[forum.id] = await postRepo.getPostFormateurIndicator(forum.id);
+            }));
+
+            res.render('forum/forumCoursFormateur', {
+                cours_id,
+                cours,
+                forums,
+                posts
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Erreur chargement des forums.");
+        }
+    }
+
+    // --- VUE APPRENANT : CONTENU D'UN FORUM ---
+    async showForumApprenant(req, res) {
+        const forum_id = parseInt(req.params.id);
+        const user_id = req.session.user_id;
+
+        try {
+            const forum = await forumRepo.getFromForumCours(forum_id);
+            const posts = await postRepo.getPostByForumUser(user_id, forum_id);
+
+            res.render('forum/apprenantForum', {
+                forum_id,
+                forum,
+                posts
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Erreur chargement du forum.");
+        }
+    }
+}
+
+module.exports = new ForumController();
