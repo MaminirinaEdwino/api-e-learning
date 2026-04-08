@@ -1,8 +1,8 @@
 const { Op, fn, col, literal } = require('sequelize');
-const Utilisateur = require('../models/Utilisateur');
-const Inscription = require('../models/Inscription');
-const Cours = require('../models/Cours');
-const Post = require('../models/Post');
+const Utilisateur = require('../models/utilisateur.model');
+const Inscription = require('../models/inscriptions.model');
+const Cours = require('../models/cours.model');
+const Post = require('../models/posts.model');
 const JournalActivite = require('../models/JournalActivite');
 
 class UtilisateurRepository {

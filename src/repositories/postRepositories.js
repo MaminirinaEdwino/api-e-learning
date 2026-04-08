@@ -1,5 +1,5 @@
 const { literal } = require('sequelize');
-const Post = require('../models/Post');
+const Post = require('../models/posts.model');
 const Utilisateur = require('../models/Utilisateur');
 const Formateur = require('../models/Formateur');
 

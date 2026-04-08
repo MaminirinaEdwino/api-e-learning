@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const utilisateurRepo = require('../repositories/utilisateurRepository');
+const utilisateurRepo = require('../repositories/utilisateurRepositories');
 const formateurRepo = require('../repositories/formateurRepository');
 
 class AuthController {
