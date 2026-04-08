@@ -1,8 +1,8 @@
-const Formation = require('../models/Formation');
-const Forum = require('../models/Forum');
-const Cours = require('../models/Cours');
+const Formation = require('../models/formation.model');
+const Forum = require('../models/forum.model');
+const Cours = require('../models/cours.model');
 
-class FormationRepository {
+class FormationRepositories {
     
     // Équivalent de Insert
     async insert(data) {
@@ -44,7 +44,7 @@ class FormationRepository {
     }
 
     // Équivalent de GetForGestionForum
-    // Note : Cette méthode SQL originale semble appartenir à un ForumRepository, 
+    // Note : Cette méthode SQL originale semble appartenir à un ForumRepositories, 
     // mais je la convertis ici pour respecter votre structure.
     async getForGestionForum() {
         return await Forum.findAll({
@@ -60,4 +60,4 @@ class FormationRepository {
     }
 }
 
-module.exports = new FormationRepository();
+module.exports = new FormationRepositories();

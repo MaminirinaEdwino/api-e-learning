@@ -1,8 +1,8 @@
 const { Op } = require('sequelize');
-const Module = require('../models/Module');
-const Completion = require('../models/Completion'); // Table pour GetModuletermine
+const Module = require('../models/module.model');
+const Completion = require('../models/completion.model'); // Table pour GetModuletermine
 
-class ModuleRepository {
+class ModuleRepositories {
 
     /**
      * Équivalent de Insert
@@ -111,4 +111,4 @@ class ModuleRepository {
     }
 }
 
-module.exports = new ModuleRepository();
+module.exports = new ModuleRepositories();

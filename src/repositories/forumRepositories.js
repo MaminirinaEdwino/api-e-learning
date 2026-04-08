@@ -1,7 +1,7 @@
-const Forum = require('../models/Forum');
-const Cours = require('../models/Cours');
+const Forum = require('../models/forum.model');
+const Cours = require('../models/cours.model');
 
-class ForumRepository {
+class ForumRepositories {
 
     /**
      * Équivalent de Insert
@@ -88,4 +88,4 @@ class ForumRepository {
     }
 }
 
-module.exports = new ForumRepository();
+module.exports = new ForumRepositories();

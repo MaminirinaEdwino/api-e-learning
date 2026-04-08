@@ -1,8 +1,8 @@
-const formationRepo = require('../repositories/formationRepository');
-const coursRepo = require('../repositories/coursRepository');
-const forumRepo = require('../repositories/forumRepository');
-const inscriptionRepo = require('../repositories/inscriptionRepository');
-const Inscription = require('../models/Inscription'); // Import du modèle pour l'instanciation
+const formationRepo = require('../repositories/formationRepositories');
+const coursRepo = require('../repositories/coursRepositories');
+const forumRepo = require('../repositories/forumRepositories');
+const inscriptionRepo = require('../repositories/inscriptionRepositories');
+const Inscription = require('../models/inscriptions.model'); // Import du modèle pour l'instanciation
 
 class ApprenantController {
     

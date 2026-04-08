@@ -1,7 +1,7 @@
-const forumRepo = require('../repositories/forumRepository');
-const formationRepo = require('../repositories/formationRepository');
-const postRepo = require('../repositories/postRepository');
-const journalRepo = require('../repositories/journalActiviteRepository');
+const forumRepo = require('../repositories/forumRepositories');
+const formationRepo = require('../repositories/formationRepositories');
+const postRepo = require('../repositories/postRepositories');
+const journalRepo = require('../repositories/journalActiviteRepositories');
 
 class AdminForumController {
 

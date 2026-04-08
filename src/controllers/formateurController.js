@@ -1,8 +1,8 @@
-const coursRepo = require('../repositories/coursRepository');
-const forumMessageRepo = require('../repositories/forumMessageRepository');
-const moduleRepo = require('../repositories/moduleRepository');
-const inscriptionRepo = require('../repositories/inscriptionRepository');
-const resultatQuizRepo = require('../repositories/resultatQuizRepository');
+const coursRepo = require('../repositories/coursRepositories');
+const forumMessageRepo = require('../repositories/forumMessageRepositories');
+const moduleRepo = require('../repositories/moduleRepositories');
+const inscriptionRepo = require('../repositories/inscriptionRepositories');
+const resultatQuizRepo = require('../repositories/resultatQuizRepositories');
 
 class FormateurController {
 

@@ -1,4 +1,4 @@
-const postRepo = require('../repositories/postRepository');
+const postRepo = require('../repositories/postRepositories');
 
 class PostController {
     /**

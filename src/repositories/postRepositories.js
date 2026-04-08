@@ -1,9 +1,9 @@
 const { literal } = require('sequelize');
 const Post = require('../models/posts.model');
-const Utilisateur = require('../models/Utilisateur');
-const Formateur = require('../models/Formateur');
+const Utilisateur = require('../models/utilisateur.model');
+const Formateur = require('../models/formateur.model');
 
-class PostRepository {
+class PostRepositories {
 
     /**
      * Équivalent de Insert
@@ -110,4 +110,4 @@ class PostRepository {
     }
 }
 
-module.exports = new PostRepository();
+module.exports = new PostRepositories();

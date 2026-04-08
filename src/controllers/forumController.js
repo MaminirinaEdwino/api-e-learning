@@ -1,6 +1,6 @@
-const forumRepo = require('../repositories/forumRepository');
-const postRepo = require('../repositories/postRepository');
-const coursRepo = require('../repositories/coursRepository');
+const forumRepo = require('../repositories/forumRepositories');
+const postRepo = require('../repositories/postRepositories');
+const coursRepo = require('../repositories/coursRepositories');
 
 class ForumController {
     
@@ -9,7 +9,7 @@ class ForumController {
         try {
             const { titre, description, cours_id } = req.body;
             
-            // Insertion via le repository
+            // Insertion via le Repositories
             await forumRepo.insert({
                 cours_id: parseInt(cours_id),
                 titre: titre.trim(),

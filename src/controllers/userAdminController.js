@@ -1,5 +1,5 @@
-const userRepo = require('../repositories/utilisateursRepository');
-const journalRepo = require('../repositories/journalActiviteRepository');
+const userRepo = require('../repositories/utilisateurRepositories');
+const journalRepo = require('../repositories/journalActiviteRepositories');
 
 class UserAdminController {
     /**

@@ -1,9 +1,9 @@
 const path = require('path');
 const fs = require('fs');
-const coursRepo = require('../repositories/coursRepository');
-const moduleRepo = require('../repositories/moduleRepository');
-const leconRepo = require('../repositories/leconRepository');
-const formationRepo = require('../repositories/formationRepository');
+const coursRepo = require('../repositories/coursRepositories');
+const moduleRepo = require('../repositories/moduleRepositories');
+const leconRepo = require('../repositories/leconRepositories');
+const formationRepo = require('../repositories/formationRepositories');
 
 class CoursController {
 

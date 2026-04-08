@@ -1,8 +1,8 @@
-const quizRepo = require('../repositories/quizRepository');
-const questionRepo = require('../repositories/questionRepository');
-const inscriptionRepo = require('../repositories/inscriptionRepository');
-const coursRepo = require('../repositories/coursRepository');
-const moduleRepo = require('../repositories/moduleRepository');
+const quizRepo = require('../repositories/quizRepositories');
+const questionRepo = require('../repositories/questionRepositories');
+const inscriptionRepo = require('../repositories/inscriptionRepositories');
+const coursRepo = require('../repositories/coursRepositories');
+const moduleRepo = require('../repositories/moduleRepositories');
 
 class QuizController {
     

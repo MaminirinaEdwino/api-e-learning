@@ -1,9 +1,9 @@
 const { Op } = require('sequelize');
-const ForumMessage = require('../models/ForumMessage');
-const Utilisateur = require('../models/Utilisateur');
-const Cours = require('../models/Cours');
+const ForumMessage = require('../models/forum.modelMessage');
+const Utilisateur = require('../models/utilisateur.model');
+const Cours = require('../models/cours.model');
 
-class ForumMessageRepository {
+class ForumMessageRepositories {
 
     /**
      * Équivalent de Insert
@@ -89,4 +89,4 @@ class ForumMessageRepository {
     }
 }
 
-module.exports = new ForumMessageRepository();
+module.exports = new ForumMessageRepositories();

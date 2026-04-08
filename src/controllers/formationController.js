@@ -1,5 +1,5 @@
-const formationRepo = require('../repositories/formationRepository');
-const coursRepo = require('../repositories/coursRepository');
+const formationRepo = require('../repositories/formationRepositories');
+const coursRepo = require('../repositories/coursRepositories');
 
 class FormationController {
     /**

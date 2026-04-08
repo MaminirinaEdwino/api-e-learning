@@ -1,8 +1,8 @@
 const { Op, literal } = require('sequelize');
-const Formateur = require('../models/Formateur');
-const JournalActivite = require('../models/JournalActivite'); // Pour la méthode UpdateStatus
+const Formateur = require('../models/formateur.model');
+const JournalActivite = require('../models/journal_activite.model'); // Pour la méthode UpdateStatus
 
-class FormateurRepository {
+class FormateurRepositories {
 
     // Équivalent de Insert
     async insert(data) {
@@ -135,4 +135,4 @@ class FormateurRepository {
     }
 }
 
-module.exports = new FormateurRepository();
+module.exports = new FormateurRepositories();

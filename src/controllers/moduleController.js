@@ -1,6 +1,6 @@
-const moduleRepo = require('../repositories/moduleRepository');
-const completionRepo = require('../repositories/completionRepository');
-const leconRepo = require('../repositories/leconRepository');
+const moduleRepo = require('../repositories/moduleRepositories');
+const completionRepo = require('../repositories/completionRepositories');
+const leconRepo = require('../repositories/leconRepositories');
 
 class ModuleController {
 

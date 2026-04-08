@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const leconRepo = require('../repositories/leconRepository');
+const leconRepo = require('../repositories/leconRepositories');
 
 class LeconController {
 

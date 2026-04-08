@@ -1,6 +1,6 @@
-const Lecon = require('../models/Lecon');
+const Lecon = require('../models/lecon.model');
 
-class LeconRepository {
+class LeconRepositories {
 
     /**
      * Équivalent de Insert
@@ -73,4 +73,4 @@ class LeconRepository {
     }
 }
 
-module.exports = new LeconRepository();
+module.exports = new LeconRepositories();

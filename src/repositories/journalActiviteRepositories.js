@@ -1,8 +1,8 @@
 const { Op, fn, col, literal } = require('sequelize');
-const JournalActivite = require('../models/JournalActivite');
-const Utilisateur = require('../models/Utilisateur');
+const JournalActivite = require('../models/journal_activite.model');
+const Utilisateur = require('../models/utilisateur.model');
 
-class JournalActiviteRepository {
+class JournalActiviteRepositories {
 
     /**
      * Équivalent de Insert
@@ -144,4 +144,4 @@ class JournalActiviteRepository {
     }
 }
 
-module.exports = new JournalActiviteRepository();
+module.exports = new JournalActiviteRepositories();

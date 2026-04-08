@@ -1,4 +1,4 @@
-const journalRepo = require('../repositories/journalActiviteRepository');
+const journalRepo = require('../repositories/journalActiviteRepositories');
 
 class JournalController {
 

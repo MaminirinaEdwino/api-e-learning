@@ -1,6 +1,6 @@
-const Question = require('../models/Question');
+const Question = require('../models/questions.model');
 
-class QuestionRepository {
+class QuestionRepositories {
 
     /**
      * Équivalent de Insert
@@ -76,4 +76,4 @@ class QuestionRepository {
     }
 }
 
-module.exports = new QuestionRepository();
+module.exports = new QuestionRepositories();

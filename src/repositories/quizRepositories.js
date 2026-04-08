@@ -1,10 +1,10 @@
 const { literal } = require('sequelize');
-const Quiz = require('../models/Quiz');
-const Module = require('../models/Module');
-const Cours = require('../models/Cours');
-const Question = require('../models/Question');
+const Quiz = require('../models/quiz.model');
+const Module = require('../models/module.model');
+const Cours = require('../models/cours.model');
+const Question = require('../models/questions.model');
 
-class QuizRepository {
+class QuizRepositories {
 
     /**
      * Équivalent de Insert
@@ -149,4 +149,4 @@ class QuizRepository {
     }
 }
 
-module.exports = new QuizRepository();
+module.exports = new QuizRepositories();

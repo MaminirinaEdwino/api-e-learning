@@ -1,5 +1,5 @@
-const userRepo = require('../repositories/utilisateursRepository');
-const formateurRepo = require('../repositories/formateurRepository');
+const userRepo = require('../repositories/utilisateurRepositories');
+const formateurRepo = require('../repositories/formateurRepositories');
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcrypt');

@@ -1,15 +1,15 @@
 const { Op, fn, col, literal } = require('sequelize');
-const Cours = require('../models/Cours');
-const Formation = require('../models/Formation');
-const ContenuFormation = require('../models/ContenuFormation');
-const Inscription = require('../models/Inscription');
-const Module = require('../models/Module');
-const Completion = require('../models/Completion');
-const Utilisateur = require('../models/Utilisateur');
-const Quiz = require('../models/Quiz');
-const ResultatQuiz = require('../models/ResultatQuiz');
+const Cours = require('../models/cours.model');
+const Formation = require('../models/formation.model');
+const ContenuFormation = require('../models/contenu_formation.model');
+const Inscription = require('../models/inscriptions.model');
+const Module = require('../models/module.model');
+const Completion = require('../models/completion.model');
+const Utilisateur = require('../models/utilisateur.model');
+const Quiz = require('../models/quiz.model');
+const ResultatQuiz = require('../models/resultat_quiz.model');
 
-class CoursRepository {
+class CoursRepositories {
 
     // Équivalent de CountCours
     async countAll() {
@@ -145,4 +145,4 @@ class CoursRepository {
     }
 }
 
-module.exports = new CoursRepository();
+module.exports = new CoursRepositories();

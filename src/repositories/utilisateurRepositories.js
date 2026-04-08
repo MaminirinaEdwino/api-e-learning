@@ -3,9 +3,9 @@ const Utilisateur = require('../models/utilisateur.model');
 const Inscription = require('../models/inscriptions.model');
 const Cours = require('../models/cours.model');
 const Post = require('../models/posts.model');
-const JournalActivite = require('../models/JournalActivite');
+const JournalActivite = require('../models/journal_activite.model');
 
-class UtilisateurRepository {
+class UtilisateurRepositories {
 
     /**
      * Équivalent de Insert
@@ -159,4 +159,4 @@ class UtilisateurRepository {
     }
 }
 
-module.exports = new UtilisateurRepository();
+module.exports = new UtilisateurRepositories();

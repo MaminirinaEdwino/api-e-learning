@@ -1,7 +1,7 @@
-const ContenuFormation = require('../models/ContenuFormation');
-const Formation = require('../models/Formation');
+const ContenuFormation = require('../models/contenu_formation.model');
+const Formation = require('../models/formation.model');
 
-class ContenuFormationRepository {
+class ContenuFormationRepositories {
     
     // Équivalent de Insert
     async insert(data) {
@@ -81,4 +81,4 @@ class ContenuFormationRepository {
     }
 }
 
-module.exports = new ContenuFormationRepository();
+module.exports = new ContenuFormationRepositories();

@@ -1,7 +1,7 @@
-const Completion = require('../models/Completion');
+const Completion = require('../models/completion.model');
 const { Op } = require('sequelize');
 
-class CompletionRepository {
+class CompletionRepositories {
     
     // Équivalent de Insert
     async insert(data) {
@@ -93,4 +93,4 @@ class CompletionRepository {
     }
 }
 
-module.exports = new CompletionRepository();
+module.exports = new CompletionRepositories();

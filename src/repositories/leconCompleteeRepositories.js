@@ -1,6 +1,6 @@
-const LeconCompletee = require('../models/LeconCompletee');
+const LeconCompletee = require('../models/lecon.modelCompletee');
 
-class LeconCompleteeRepository {
+class LeconCompleteeRepositories {
 
     /**
      * Équivalent de Insert
@@ -63,4 +63,4 @@ class LeconCompleteeRepository {
     }
 }
 
-module.exports = new LeconCompleteeRepository();
+module.exports = new LeconCompleteeRepositories();

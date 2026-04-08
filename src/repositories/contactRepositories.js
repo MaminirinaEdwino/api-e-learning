@@ -1,6 +1,6 @@
 const Contact = require('../models/Contact');
 
-class ContactRepository {
+class ContactRepositories {
     
     // Équivalent de Insert
     async insert(data) {
@@ -45,4 +45,4 @@ class ContactRepository {
     }
 }
 
-module.exports = new ContactRepository();
+module.exports = new ContactRepositories();

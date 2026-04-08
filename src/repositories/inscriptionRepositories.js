@@ -1,9 +1,9 @@
 const { Op } = require('sequelize');
-const Inscription = require('../models/Inscription');
-const Cours = require('../models/Cours');
-const Utilisateur = require('../models/Utilisateur');
+const Inscription = require('../models/inscriptions.model');
+const Cours = require('../models/cours.model');
+const Utilisateur = require('../models/utilisateur.model');
 
-class InscriptionRepository {
+class InscriptionRepositories {
 
     /**
      * Équivalent de Insert
@@ -151,4 +151,4 @@ class InscriptionRepository {
     }
 }
 
-module.exports = new InscriptionRepository();
+module.exports = new InscriptionRepositories();

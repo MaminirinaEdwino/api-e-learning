@@ -1,4 +1,4 @@
-const sousFormationRepo = require('../repositories/contenuFormationRepository');
+const sousFormationRepo = require('../repositories/contenuFormationRepositories');
 
 class SousFormationController {
     /**

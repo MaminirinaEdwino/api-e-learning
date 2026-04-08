@@ -1,7 +1,7 @@
-const formationRepo = require('../repositories/formationRepository');
-const contenuRepo = require('../repositories/contenuFormationRepository');
-const inscriptionRepo = require('../repositories/inscriptionRepository');
-const journalRepo = require('../repositories/journalActiviteRepository');
+const formationRepo = require('../repositories/formationRepositories');
+const contenuRepo = require('../repositories/contenuFormationRepositories');
+const inscriptionRepo = require('../repositories/inscriptionRepositories');
+const journalRepo = require('../repositories/journalActiviteRepositories');
 
 class AdminFormationController {
 
