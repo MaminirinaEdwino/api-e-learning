@@ -55,7 +55,10 @@ app.use(signinRoutes);
 
 // --- 5. GESTION DES ERREURS 404 ---
 app.use((req, res) => {
-    res.status(404).render('errors/404', { message: "Page non trouvée" });
+    res.status(404).json({
+        "status": "page not found",
+        message:"routes not found"
+    })
 });
 
 // --- 6. LANCEMENT DU SERVEUR ---
