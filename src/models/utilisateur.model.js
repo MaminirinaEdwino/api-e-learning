@@ -20,7 +20,8 @@ const User = sequelize.define('User', {
     appareil: DataTypes.STRING,
     accessibilite: DataTypes.TEXT,
     rgpd: { type: DataTypes.BOOLEAN, defaultValue: false },
-    charte: { type: DataTypes.BOOLEAN, defaultValue: false }
+    charte: { type: DataTypes.BOOLEAN, defaultValue: false },
+    actif: {type: DataTypes.BOOLEAN}
 }, { tableName: 'utilisateurs', timestamps: false });
 
 module.exports = User;

@@ -1,9 +1,18 @@
 {
     "_type": "request",
-    "method": "GET",
+    "method": "POST",
     "body": {
-        "mimeType": "No Body"
+        "mimeType": "application/json",
+        "text": "{\n    \"email\": \"manou@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
-    "url": "",
-    "sortOrder": 0
+    "url": "http://localhost:3000/auth",
+    "sortOrder": 0,
+    "parameters": [],
+    "pathParameters": [],
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
 }

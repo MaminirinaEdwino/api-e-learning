@@ -63,14 +63,16 @@ class AuthController {
             // 4. Tentative APPRENANT
             const user = await utilisateurRepo.findByEmail(email);
             if (user) {
-                if (!user.actif) {
+                if (!user.dataValues.actif) {
                     return res.status(403).json({ 
-                        success: false, 
+                        success: user.actif, 
                         message: "Votre compte est désactivé. Contactez l'administrateur." 
                     });
                 }
+                const dbHash = user.dataValues.mot_de_passe.replace(/^\$2y\$/, "$2a$");
 
-                const match = await bcrypt.compare(password, user.mot_de_passe);
+                const match = await bcrypt.compare(password, dbHash);
+                console.log("match", user.dataValues.mot_de_passe, password)
                 if (match) {
                     delete req.session.login_attempts[email];
                     const sessionData = this.initSession(req, 'apprenant', user);
