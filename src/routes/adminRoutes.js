@@ -8,7 +8,6 @@ const isAdmin = (req, res, next) => {
     res.redirect('/admin/login');
 };
 
-router.get('/admin/login', adminCtrl.loginPage);
 router.post('/admin/login', adminCtrl.loginAction);
 
 router.get('/admin/backoffice', isAdmin, adminCtrl.backoffice);
