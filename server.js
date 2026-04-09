@@ -2,6 +2,12 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const app = express();
+const cors = require('cors');
+
+app.use(cors({
+    origin: 'http://localhost:5173', // L'URL de votre front-end (ex: Vite/React)
+    credentials: true // <--- INDISPENSABLE pour les sessions
+}));
 
 // --- 1. MIDDLEWARES DE BASE ---
 // Remplace $_POST et $_GET

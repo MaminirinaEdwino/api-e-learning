@@ -6,7 +6,7 @@
         "text": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
     "url": "{{host}}/admin/login",
-    "sortOrder": 1,
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": [],
     "headers": [
@@ -14,5 +14,8 @@
             "name": "Content-Type",
             "value": "application/json"
         }
-    ]
+    ],
+    "authentication": {
+        "type": "No Auth"
+    }
 }
