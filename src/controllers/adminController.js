@@ -42,17 +42,18 @@ class AdminController {
 
     // --- TABLEAU DE BORD (JSON) ---
     async backoffice(req, res) {
+        console.log("teste")
         try {
             const stats = {
-                newApprenant: await utilisateurRepo.getNewApprenantCount(),
-                newFormateur: await formateurRepo.getNewFormateurCount(),
+                // newApprenant: await utilisateurRepo.getNewApprenantCount(),
+                newFormateur: await formateurRepo.getNewFormateursCount(),
                 newCours: await coursRepo.getNewCoursCount(),
                 inactiveUsers: await utilisateurRepo.getInactiveUsers(),
                 apprenantCount: await utilisateurRepo.countApprenant(),
                 formateursCount: await formateurRepo.countFormateur(),
                 coursCount: await coursRepo.countCours(),
                 activiteLog: await journalRepo.countLog(),
-                lastLog: await journalRepo.getLastLog()
+                lastLog: await journalRepo.getLastLogs()
             };
 
             const inscriptions = {};
@@ -65,7 +66,7 @@ class AdminController {
 
             res.json({ success: true, stats, inscriptions });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur lors de la récupération des stats." });
+            res.status(500).json({ success: false, message: "Erreur lors de la récupération des stats.\nerror : "+ error });
         }
     }
 
