@@ -3,34 +3,28 @@ const utilisateurRepo = require('../repositories/utilisateurRepositories');
 const formateurRepo = require('../repositories/formateurRepositories');
 
 class AuthController {
-    // Affiche la page de connexion
-    renderLogin(req, res) {
-        res.render('authentication/connexion', { 
-            error: req.session.error, 
-            success: req.session.success 
-        });
-        // Nettoyage après affichage (Flash messages)
-        delete req.session.error;
-        delete req.session.success;
-    }
-
-    // Déconnexion
+    // Déconnexion (JSON)
     logout(req, res) {
-        req.session.destroy(() => {
-            res.redirect('/connexion');
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: "Erreur lors de la déconnexion." });
+            }
+            res.json({ success: true, message: "Déconnexion réussie." });
         });
     }
 
-    // Traitement de l'authentification (POST)
+    // Traitement de l'authentification (POST JSON)
     async loginAction(req, res) {
         const { email, password } = req.body;
         const maxAttempts = 5;
-        const lockoutTime = 15 * 60 * 1000; // 15 minutes en ms
+        const lockoutTime = 15 * 60 * 1000; // 15 minutes
 
         // 1. Validation de base
         if (!email || !password) {
-            req.session.error = "Veuillez remplir tous les champs.";
-            return res.redirect('/connexion');
+            return res.status(400).json({ 
+                success: false, 
+                message: "Veuillez remplir tous les champs." 
+            });
         }
 
         // 2. Vérification Force Brute (Lockout)
@@ -41,43 +35,54 @@ class AuthController {
             const timePassed = Date.now() - attempts.time;
             if (timePassed < lockoutTime) {
                 const minutesLeft = Math.ceil((lockoutTime - timePassed) / 60000);
-                req.session.error = `Trop de tentatives. Réessayez dans ${minutesLeft} minutes.`;
-                return res.redirect('/connexion');
+                return res.status(429).json({ 
+                    success: false, 
+                    message: `Trop de tentatives. Réessayez dans ${minutesLeft} minutes.` 
+                });
             } else {
                 delete req.session.login_attempts[email];
             }
         }
 
         try {
-            // 3. Tentative de trouver un FORMATEUR d'abord
+            // 3. Tentative FORMATEUR
             const formateur = await formateurRepo.getForAuth(email);
             if (formateur) {
                 const match = await bcrypt.compare(password, formateur.password);
                 if (match) {
-                    this.initSession(req, 'formateur', formateur);
-                    return res.redirect('/espace/formateur');
+                    delete req.session.login_attempts[email];
+                    const sessionData = this.initSession(req, 'formateur', formateur);
+                    return res.json({ 
+                        success: true, 
+                        message: "Connexion réussie (Formateur).",
+                        user: sessionData 
+                    });
                 }
             }
 
-            // 4. Tentative de trouver un APPRENANT
+            // 4. Tentative APPRENANT
             const user = await utilisateurRepo.findByEmail(email);
             if (user) {
-                // Vérification si le compte est actif
                 if (!user.actif) {
-                    req.session.error = "Votre compte est désactivé. Contactez l'administrateur.";
-                    return res.redirect('/connexion');
+                    return res.status(403).json({ 
+                        success: false, 
+                        message: "Votre compte est désactivé. Contactez l'administrateur." 
+                    });
                 }
 
                 const match = await bcrypt.compare(password, user.mot_de_passe);
                 if (match) {
-                    // Succès : réinitialisation des tentatives
                     delete req.session.login_attempts[email];
-                    this.initSession(req, 'apprenant', user);
-                    return res.redirect('/espace/apprenant');
+                    const sessionData = this.initSession(req, 'apprenant', user);
+                    return res.json({ 
+                        success: true, 
+                        message: "Connexion réussie (Apprenant).",
+                        user: sessionData 
+                    });
                 }
             }
 
-            // 5. Gestion de l'échec (Mot de passe faux ou Email inconnu)
+            // 5. Gestion de l'échec
             if (!req.session.login_attempts[email]) {
                 req.session.login_attempts[email] = { count: 0, time: Date.now() };
             }
@@ -85,30 +90,44 @@ class AuthController {
             req.session.login_attempts[email].time = Date.now();
 
             const remaining = maxAttempts - req.session.login_attempts[email].count;
-            req.session.error = `Identifiants incorrects. Tentatives restantes : ${remaining}`;
-            res.redirect('/connexion');
+            
+            return res.status(401).json({ 
+                success: false, 
+                message: "Identifiants incorrects.",
+                attemptsRemaining: remaining > 0 ? remaining : 0
+            });
 
         } catch (error) {
             console.error("Auth Error:", error);
-            req.session.error = "Une erreur serveur est survenue.";
-            res.redirect('/connexion');
+            res.status(500).json({ 
+                success: false, 
+                message: "Une erreur serveur est survenue." 
+            });
         }
     }
 
-    // Helper pour initialiser la session selon le rôle
+    // Helper pour initialiser la session et retourner les données publiques
     initSession(req, type, data) {
         req.session.logged_in = true;
         req.session.user_type = type;
         
+        let publicData = { role: type };
+
         if (type === 'formateur') {
             req.session.formateur_id = data.id;
             req.session.formateur_nom_prenom = data.nom_prenom;
             req.session.user_role = "formateur";
+            publicData.nom = data.nom_prenom;
+            publicData.id = data.id;
         } else {
             req.session.user_id = data.id;
             req.session.user_nom = data.nom;
+            req.session.user_role = "apprenant";
+            publicData.nom = data.nom;
+            publicData.id = data.id;
         }
-        req.session.success = `Bienvenue, ${data.nom_prenom || data.nom} !`;
+
+        return publicData;
     }
 }
 
