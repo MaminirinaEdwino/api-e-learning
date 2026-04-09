@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/logout",
-    "sortOrder": 3,
+    "url": "{{host}}/admin/backoffice",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": []
 }

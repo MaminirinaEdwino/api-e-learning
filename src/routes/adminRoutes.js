@@ -4,8 +4,12 @@ const adminCtrl = require('../controllers/adminController');
 
 // Middleware de sécurité
 const isAdmin = (req, res, next) => {
+    console.log(req.session)
     if (req.session.user_role === 'admin') return next();
-    res.redirect('/admin/login');
+    res.json({
+        status: "failed",
+        message: "Unauthorized"
+    })
 };
 
 router.post('/admin/login', adminCtrl.loginAction);

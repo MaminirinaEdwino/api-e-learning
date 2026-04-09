@@ -25,6 +25,7 @@ class AdminController {
                 if (match) {
                     req.session.user_id = user.id;
                     req.session.user_role = user.role;
+                    console.log(req.session)
                     return res.json({ 
                         success: true, 
                         message: "Authentification admin réussie",
