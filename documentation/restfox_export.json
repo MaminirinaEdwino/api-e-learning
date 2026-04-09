@@ -1,1 +1,53 @@
-{"exportedFrom":"Restfox-1.0.0","collection":[{"_type":"request","method":"POST","body":{"mimeType":"application/json","text":"{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"},"url":"{{host}}/auth","sortOrder":0,"parameters":[],"pathParameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"_id":"xXxaDxz7FKLIc7tWxTSgu","parentId":null,"name":"login","workspaceId":"bwVi7-XRvtYteksWouFbf","plugins":[]},{"_type":"request","method":"GET","body":{"mimeType":"No Body"},"url":"{{host}}/logout","sortOrder":0,"parameters":[],"pathParameters":[],"_id":"j9kpNzSNVALg938teLbWU","parentId":null,"name":"logout","workspaceId":"bwVi7-XRvtYteksWouFbf","plugins":[]}],"environments":[{"name":"Default","environment":{"host":"http://localhost:3000"}}]}
+{
+    "exportedFrom": "Restfox-1.0.0",
+    "collection": [
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+            },
+            "url": "{{host}}/auth",
+            "sortOrder": 0,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "xXxaDxz7FKLIc7tWxTSgu",
+            "parentId": null,
+            "name": "login",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/logout",
+            "sortOrder": 0,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "j9kpNzSNVALg938teLbWU",
+            "parentId": null,
+            "name": "logout",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        }
+    ],
+    "environments": [
+        {
+            "name": "Default",
+            "environment": {
+                "host": "http://localhost:3000"
+            }
+        }
+    ],
+    "sortOrder": 3
+}

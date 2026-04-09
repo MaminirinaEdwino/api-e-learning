@@ -9,7 +9,6 @@ const isAdmin = (req, res, next) => {
 };
 
 router.post('/admin/login', adminCtrl.loginAction);
-
 router.get('/admin/backoffice', isAdmin, adminCtrl.backoffice);
 router.get('/admin/gestionuser', isAdmin, adminCtrl.gestionUser);
 router.get('/export/csv', isAdmin, adminCtrl.exportCsv);

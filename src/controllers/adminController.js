@@ -12,14 +12,15 @@ class AdminController {
 
     // --- AUTHENTIFICATION (JSON) ---
     async loginAction(req, res) {
-        const { email, mot_de_passe } = req.body;
+        const { email, password } = req.body;
+        console.log(email, password)
         try {
             const user = await utilisateurRepo.findByEmail(email);
 
             // Vérification sécurisée avec compatibilité PHP ($2y$ -> $2a$)
             if (user && user.role === 'admin') {
                 const dbHash = user.mot_de_passe.replace(/^\$2y\$/, "$2a$");
-                const match = await bcrypt.compare(mot_de_passe, dbHash);
+                const match = await bcrypt.compare(password, dbHash);
 
                 if (match) {
                     req.session.user_id = user.id;
