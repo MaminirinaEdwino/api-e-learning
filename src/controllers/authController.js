@@ -48,7 +48,8 @@ class AuthController {
             // 3. Tentative FORMATEUR
             const formateur = await formateurRepo.getForAuth(email);
             if (formateur) {
-                const match = await bcrypt.compare(password, formateur.password);
+                const dbHash = formateur.password.replace(/^\$2y\$/, "$2a$");
+                const match = await bcrypt.compare(password,dbHash);
                 if (match) {
                     delete req.session.login_attempts[email];
                     const sessionData = this.initSession(req, 'formateur', formateur);

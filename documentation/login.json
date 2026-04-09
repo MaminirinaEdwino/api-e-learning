@@ -3,9 +3,9 @@
     "method": "POST",
     "body": {
         "mimeType": "application/json",
-        "text": "{\n    \"email\": \"manou@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+        "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
-    "url": "http://localhost:3000/auth",
+    "url": "{{host}}/auth",
     "sortOrder": 0,
     "parameters": [],
     "pathParameters": [],

@@ -1,0 +1,11 @@
+{
+    "_type": "request",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "url": "{{host}}/logout",
+    "sortOrder": 0,
+    "parameters": [],
+    "pathParameters": []
+}
