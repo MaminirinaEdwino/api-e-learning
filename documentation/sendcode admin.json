@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/logout",
-    "sortOrder": 7,
+    "url": "{{host}}/send/code",
+    "sortOrder": 1,
     "parameters": [],
     "pathParameters": []
 }

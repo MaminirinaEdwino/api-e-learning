@@ -163,7 +163,7 @@ class AdminController {
                 });
             });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur lors de la génération du PDF." });
+            res.status(500).json({ success: false, message: "Erreur lors de la génération du PDF.\nerror: "+error });
         }
     }
 }

@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/logout",
-    "sortOrder": 7,
+    "url": "{{host}}/espace/certificat",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": []
 }
