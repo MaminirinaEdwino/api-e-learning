@@ -42,7 +42,6 @@ class AdminController {
 
     // --- TABLEAU DE BORD (JSON) ---
     async backoffice(req, res) {
-        console.log("teste")
         try {
             const stats = {
                 // newApprenant: await utilisateurRepo.getNewApprenantCount(),
@@ -73,14 +72,16 @@ class AdminController {
     // --- GESTION UTILISATEURS (JSON) ---
     async gestionUser(req, res) {
         const { search, sort = 'id', order = 'asc' } = req.query;
+        
         try {
+            
             const users = await utilisateurRepo.getFilteredUsers(search, ['apprenant'], sort, order);
             const formateurs = await formateurRepo.getFilteredFormateurs(search, sort, order);
             const admins = await utilisateurRepo.getFilteredUsers(search, ['admin', 'moderator'], sort, order);
 
             res.json({ success: true, data: { users, formateurs, admins }, filters: { search, sort, order } });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur de filtrage." });
+            res.status(500).json({ success: false, message: "Erreur de filtrage.\nerror: "+error });
         }
     }
 

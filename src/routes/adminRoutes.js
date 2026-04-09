@@ -13,9 +13,9 @@ const isAdmin = (req, res, next) => {
 };
 
 router.post('/admin/login', adminCtrl.loginAction);
-router.get('/admin/backoffice', adminCtrl.backoffice);
+router.get('/admin/backoffice', isAdmin,adminCtrl.backoffice);
 router.get('/admin/gestionuser', isAdmin, adminCtrl.gestionUser);
-router.get('/export/csv', isAdmin, adminCtrl.exportCsv);
+router.get('/export/csv',  adminCtrl.exportCsv);
 router.post('/send/code', isAdmin, adminCtrl.sendCode);
 router.post('/espace/certificat', isAdmin, adminCtrl.generateCertificate);
 

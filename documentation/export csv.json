@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/admin/backoffice",
-    "sortOrder": 2,
+    "url": "{{host}}/export/csv",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": []
 }
