@@ -15,3 +15,9 @@ const Question = require('./questions.model')
 const Quiz = require('./quiz.model')
 const ResultatQuiz = require('./resultat_quiz.model')
 const User = require('./utilisateur.model')
+
+const db = {
+    Completion, Contact, ContenuFormation, Cours, Formateur, Formation, Forum, Inscription, JournalActivite, LeconCompletee, Lecon, Module, Post, Question, Quiz, ResultatQuiz, User
+}
+
+module.exports = db;
