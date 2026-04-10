@@ -1,6 +1,6 @@
 const { Op, fn, col, literal } = require('sequelize');
 
-const {User, Inscription, Cours, Post, JournalActivite} = require('../models/index')
+const { User, Inscription, Cours, Post, JournalActivite } = require('../models/index')
 
 class UtilisateurRepositories {
 
@@ -70,7 +70,7 @@ class UtilisateurRepositories {
         return await User.findAll({
             attributes: [
                 'id', 'nom', 'email', 'role', 'actif',
-                [literal('MAX(COALESCE("Posts"."date_post", "Utilisateur"."created_at"))'), 'last_activity']
+                [literal('MAX(COALESCE(Post.date_post, Utilisateur.created_at))'), 'last_activity']
             ],
             include: [{
                 model: Post,
@@ -104,7 +104,7 @@ class UtilisateurRepositories {
         if (user) {
             const newStatus = !user.actif;
             await user.update({ actif: newStatus });
-            
+
             // Log dans le journal
             await JournalActivite.create({
                 admin_id: adminId,
@@ -153,6 +153,28 @@ class UtilisateurRepositories {
         return await User.destroy({
             where: { id }
         });
+    }
+
+    async getNewApprenantCount() {
+        try {
+            // On calcule la date d'il y a 24 heures
+            const oneDayAgo = new Date();
+            oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+            const count = await User.count({
+                where: {
+                    role: 'apprenant',
+                    created_at: {
+                        [Op.gte]: oneDayAgo // Op.gte signifie "Greater Than or Equal" (>=)
+                    }
+                }
+            });
+
+            return count;
+        } catch (error) {
+            console.error("Erreur lors du comptage des nouveaux apprenants :", error);
+            throw error;
+        }
     }
 }
 

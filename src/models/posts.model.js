@@ -6,7 +6,7 @@ const Post = sequelize.define('Post', {
     forum_id: { type: DataTypes.INTEGER, allowNull: false },
     utilisateur_id: { type: DataTypes.INTEGER, allowNull: false },
     contenu: { type: DataTypes.TEXT, allowNull: false },
-    created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-}, { tableName: 'posts', timestamps: false });
+    date_post: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
+}, { tableName: 'post', timestamps: false });
 
 module.exports = Post;

@@ -52,7 +52,7 @@ class AdminController {
     async backoffice(req, res) {
         try {
             const stats = {
-                // newApprenant: await utilisateurRepo.getNewApprenantCount(),
+                newApprenant: await utilisateurRepo.getNewApprenantCount(),
                 newFormateur: await formateurRepo.getNewFormateursCount(),
                 newCours: await coursRepo.getNewCoursCount(),
                 inactiveUsers: await utilisateurRepo.getInactiveUsers(),
