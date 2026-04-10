@@ -1,4 +1,4 @@
-const Lecon = require('../models/lecon.model');
+const { Lecon } = require('../models/index');
 
 class LeconRepositories {
 

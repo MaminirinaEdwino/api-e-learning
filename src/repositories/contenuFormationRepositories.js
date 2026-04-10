@@ -1,5 +1,4 @@
-const ContenuFormation = require('../models/contenu_formation.model');
-const Formation = require('../models/formation.model');
+const {ContenuFormation, Formation} = require('../models/index');
 
 class ContenuFormationRepositories {
     

@@ -1,8 +1,6 @@
 const { literal } = require('sequelize');
-const Quiz = require('../models/quiz.model');
-const Module = require('../models/module.model');
-const Cours = require('../models/cours.model');
-const Question = require('../models/questions.model');
+
+const {Quiz, Module, Cours} = require('../models/index')
 
 class QuizRepositories {
 

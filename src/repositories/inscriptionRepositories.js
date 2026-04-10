@@ -1,7 +1,5 @@
 const { Op } = require('sequelize');
-const Inscription = require('../models/inscriptions.model');
-const Cours = require('../models/cours.model');
-const Utilisateur = require('../models/utilisateur.model');
+const {Inscription, Cours, User} = require('../models/index')
 
 class InscriptionRepositories {
 
@@ -141,7 +139,7 @@ class InscriptionRepositories {
                 statut_paiement: 'paye'
             },
             include: [{
-                model: Utilisateur,
+                model: User,
                 attributes: [['id', 'utilisateur_id'], ['nom', 'utilisateur_nom']]
             }],
             attributes: [], // On ne veut pas les colonnes de la table inscription

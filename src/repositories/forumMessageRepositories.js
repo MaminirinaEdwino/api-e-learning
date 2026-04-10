@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
-const ForumMessage = require('../models/forum.modelMessage');
-const Utilisateur = require('../models/utilisateur.model');
-const Cours = require('../models/cours.model');
+
+
+const {ForumMessage , User, Cours} = require('../models/index')
 
 class ForumMessageRepositories {
 
@@ -63,7 +63,7 @@ class ForumMessageRepositories {
             where: { lu: false },
             include: [
                 {
-                    model: Utilisateur,
+                    model: User,
                     attributes: [['nom', 'utilisateur_nom']]
                 },
                 {

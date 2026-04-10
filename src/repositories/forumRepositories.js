@@ -1,6 +1,4 @@
-const Forum = require('../models/forum.model');
-const Cours = require('../models/cours.model');
-
+const {Forum, Cours} = require('../models/index')
 class ForumRepositories {
 
     /**

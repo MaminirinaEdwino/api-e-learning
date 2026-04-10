@@ -1,6 +1,6 @@
 const { Op, fn, col, literal } = require('sequelize');
-const JournalActivite = require('../models/journal_activite.model');
-const Utilisateur = require('../models/utilisateur.model');
+
+const {JournalActivite, User} = require('../models/index')
 
 class JournalActiviteRepositories {
 
@@ -58,7 +58,7 @@ class JournalActiviteRepositories {
     async getFilterLog(search, sortColumn = 'created_at', order = 'DESC') {
         const queryOptions = {
             include: [{
-                model: Utilisateur,
+                model: User,
                 attributes: ['nom'],
                 required: true
             }],
@@ -133,7 +133,7 @@ class JournalActiviteRepositories {
     async getLastLogs(limit = 5) {
         return await JournalActivite.findAll({
             include: [{
-                model: Utilisateur,
+                model: User,
                 attributes: ['nom']
             }],
             order: [['created_at', 'DESC']],

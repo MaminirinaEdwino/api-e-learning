@@ -1,8 +1,6 @@
 const { literal } = require('sequelize');
-const Post = require('../models/posts.model');
-const Utilisateur = require('../models/utilisateur.model');
-const Formateur = require('../models/formateur.model');
 
+const {Post, User, Formateur} = require('../models/index')
 class PostRepositories {
 
     /**
@@ -70,7 +68,7 @@ class PostRepositories {
                 ]
             },
             include: [{
-                model: Utilisateur,
+                model: User,
                 attributes: [], // On ne veut pas les colonnes brutes de l'user ici
                 include: [{
                     model: Formateur,
@@ -96,7 +94,7 @@ class PostRepositories {
                 [literal('CASE WHEN "Utilisateur->Formateur"."id" IS NOT NULL THEN 1 ELSE 0 END'), 'is_formateur']
             ],
             include: [{
-                model: Utilisateur,
+                model: User,
                 attributes: [],
                 include: [{
                     model: Formateur,

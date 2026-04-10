@@ -1,7 +1,7 @@
-const Contact = require('../models/Contact');
+const { Contact } = require('../models/index');
 
 class ContactRepositories {
-    
+
     // Équivalent de Insert
     async insert(data) {
         // data peut être un objet contenant nom, email, sujet, message

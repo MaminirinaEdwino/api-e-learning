@@ -1,9 +1,6 @@
 const { Op, fn, col, literal } = require('sequelize');
-const Utilisateur = require('../models/utilisateur.model');
-const Inscription = require('../models/inscriptions.model');
-const Cours = require('../models/cours.model');
-const Post = require('../models/posts.model');
-const JournalActivite = require('../models/journal_activite.model');
+
+const {User, Inscription, Cours, Post, JournalActivite} = require('../models/index')
 
 class UtilisateurRepositories {
 
@@ -18,7 +15,7 @@ class UtilisateurRepositories {
      * Équivalent de GetActiveUser
      */
     async getActiveApprenants() {
-        return await Utilisateur.findAll({
+        return await User.findAll({
             attributes: ['id', 'nom', 'email'],
             where: {
                 role: 'apprenant',
@@ -32,7 +29,7 @@ class UtilisateurRepositories {
      * Équivalent de GetInfoUserCertificat
      */
     async getInfoCertificat(apprenantId, coursId) {
-        return await Utilisateur.findOne({
+        return await User.findOne({
             where: { id: apprenantId },
             attributes: ['nom'],
             include: [{
@@ -55,7 +52,7 @@ class UtilisateurRepositories {
      * Format mois attendu : "YYYY-MM"
      */
     async countApprenantsByMonth(mois) {
-        return await Utilisateur.count({
+        return await User.count({
             where: {
                 role: 'apprenant',
                 [Op.and]: [
@@ -70,7 +67,7 @@ class UtilisateurRepositories {
      * Utilisateurs sans activité (Post) depuis plus de 30 jours
      */
     async getInactiveUsers() {
-        return await Utilisateur.findAll({
+        return await User.findAll({
             attributes: [
                 'id', 'nom', 'email', 'role', 'actif',
                 [literal('MAX(COALESCE("Posts"."date_post", "Utilisateur"."created_at"))'), 'last_activity']
@@ -91,11 +88,11 @@ class UtilisateurRepositories {
      * Équivalent de GetForAuth et GetById
      */
     async findByEmail(email) {
-        return await Utilisateur.findOne({ where: { email } });
+        return await User.findOne({ where: { email } });
     }
 
     async findById(id) {
-        return await Utilisateur.findByPk(id);
+        return await User.findByPk(id);
     }
 
     /**
@@ -103,7 +100,7 @@ class UtilisateurRepositories {
      * Combine l'update et l'écriture dans le journal (Transaction recommandée en prod)
      */
     async toggleActive(adminId, targetUserId) {
-        const user = await Utilisateur.findByPk(targetUserId);
+        const user = await User.findByPk(targetUserId);
         if (user) {
             const newStatus = !user.actif;
             await user.update({ actif: newStatus });
@@ -134,7 +131,7 @@ class UtilisateurRepositories {
             ];
         }
 
-        return await Utilisateur.findAll({
+        return await User.findAll({
             where: whereClause,
             order: [[sortCol, order]]
         });
@@ -144,7 +141,7 @@ class UtilisateurRepositories {
      * Équivalent de Update
      */
     async update(id, data) {
-        return await Utilisateur.update(data, {
+        return await User.update(data, {
             where: { id }
         });
     }
@@ -153,7 +150,7 @@ class UtilisateurRepositories {
      * Équivalent de Delete
      */
     async delete(id) {
-        return await Utilisateur.destroy({
+        return await User.destroy({
             where: { id }
         });
     }

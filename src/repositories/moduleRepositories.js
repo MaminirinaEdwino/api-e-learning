@@ -1,6 +1,5 @@
 const { Op } = require('sequelize');
-const Module = require('../models/module.model');
-const Completion = require('../models/completion.model'); // Table pour GetModuletermine
+const { Module, Completion } = require('../models/index')
 
 class ModuleRepositories {
 

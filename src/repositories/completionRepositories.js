@@ -1,8 +1,8 @@
-const Completion = require('../models/completion.model');
+const { Completion } = require('../models/index');
 const { Op } = require('sequelize');
 
 class CompletionRepositories {
-    
+
     // Équivalent de Insert
     async insert(data) {
         // En Sequelize, on peut passer directement un objet 

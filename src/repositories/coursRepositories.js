@@ -1,13 +1,5 @@
 const { Op, fn, col, literal } = require('sequelize');
-const Cours = require('../models/cours.model');
-const Formation = require('../models/formation.model');
-const ContenuFormation = require('../models/contenu_formation.model');
-const Inscription = require('../models/inscriptions.model');
-const Module = require('../models/module.model');
-const Completion = require('../models/completion.model');
-const Utilisateur = require('../models/utilisateur.model');
-const Quiz = require('../models/quiz.model');
-const ResultatQuiz = require('../models/resultat_quiz.model');
+const {Cours, Formation, ContenuFormation, Inscription, Module, Completion, User, Quiz, ResultatQuiz} = require('../models/index')
 
 class CoursRepositories {
 
@@ -121,7 +113,7 @@ class CoursRepositories {
                 model: Inscription,
                 where: { statut_paiement: 'paye' },
                 include: [{
-                    model: Utilisateur,
+                    model: User,
                     attributes: ['id', 'nom']
                 }]
             }, {

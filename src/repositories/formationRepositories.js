@@ -1,7 +1,4 @@
-const Formation = require('../models/formation.model');
-const Forum = require('../models/forum.model');
-const Cours = require('../models/cours.model');
-
+const {Formation, Forum, Cours} = require('../models/index')
 class FormationRepositories {
     
     // Équivalent de Insert

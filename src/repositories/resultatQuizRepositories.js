@@ -1,8 +1,5 @@
 const { Op, literal } = require('sequelize');
-const ResultatQuiz = require('../models/resultat_quiz.model');
-const Quiz = require('../models/quiz.model');
-const Module = require('../models/module.model');
-
+const { ResultatQuiz, Quiz, Module } = require("../models/index")
 class ResultatQuizRepositories {
 
     /**

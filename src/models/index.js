@@ -15,6 +15,7 @@ const Question = require('./questions.model')
 const Quiz = require('./quiz.model')
 const ResultatQuiz = require('./resultat_quiz.model')
 const User = require('./utilisateur.model')
+const ForumMessage = require('./forum_message.model')
 
 // Relations Formations <-> Contenu
 Formation.hasMany(ContenuFormation, { foreignKey: 'formation_id' });
@@ -82,9 +83,16 @@ User.hasMany(ResultatQuiz, { foreignKey: 'utilisateur_id' });
 ResultatQuiz.belongsTo(User, { foreignKey: 'utilisateur_id' });
 Quiz.hasMany(ResultatQuiz, { foreignKey: 'quiz_id' });
 ResultatQuiz.belongsTo(Quiz, { foreignKey: 'quiz_id' });
+User.hasMany(ForumMessage, { foreignKey: 'utilisateur_id' });
+ForumMessage.belongsTo(User, { foreignKey: 'utilisateur_id', as: 'auteur' });
+
+// Un cours possède ses propres messages de forum
+Cours.hasMany(ForumMessage, { foreignKey: 'cours_id' });
+ForumMessage.belongsTo(Cours, { foreignKey: 'cours_id' });
+
 
 const db = {
-    Completion, Contact, ContenuFormation, Cours, Formateur, Formation, Forum, Inscription, JournalActivite, LeconCompletee, Lecon, Module, Post, Question, Quiz, ResultatQuiz, User
+    Completion, Contact, ContenuFormation, Cours, Formateur, Formation, Forum, Inscription, JournalActivite, LeconCompletee, Lecon, Module, Post, Question, Quiz, ResultatQuiz, User, ForumMessage
 }
 
 module.exports = db;

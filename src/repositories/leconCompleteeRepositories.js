@@ -1,4 +1,4 @@
-const LeconCompletee = require('../models/lecon.modelCompletee');
+const { LeconCompletee } = require('../models/index');
 
 class LeconCompleteeRepositories {
 

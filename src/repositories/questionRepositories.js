@@ -1,4 +1,4 @@
-const Question = require('../models/questions.model');
+const { Question } = require('../models/index');
 
 class QuestionRepositories {
 

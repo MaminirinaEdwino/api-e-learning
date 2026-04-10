@@ -1,6 +1,5 @@
 const { Op, literal } = require('sequelize');
-const Formateur = require('../models/formateur.model');
-const JournalActivite = require('../models/journal_activite.model'); // Pour la méthode UpdateStatus
+const { Formateur, JournalActivite } = require('../models/index');
 
 class FormateurRepositories {
 
@@ -116,7 +115,7 @@ class FormateurRepositories {
     async updateStatus(id, statut, admin_id) {
         // On utilise une transaction pour s'assurer que les deux écritures réussissent
         const result = await Formateur.update({ statut }, { where: { id } });
-        
+
         await JournalActivite.create({
             admin_id: admin_id,
             action: 'Mise à jour statut formateur',
