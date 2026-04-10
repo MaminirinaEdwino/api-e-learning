@@ -7,5 +7,10 @@
     "url": "{{host}}/admin/backoffice",
     "sortOrder": 4,
     "parameters": [],
-    "pathParameters": []
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4NDIwNDMsImV4cCI6MTc3NTkyODQ0M30.7x64mRWBfKcKUeZfW5ZXK308-7W1JcyTiIdT-_2AfNU",
+        "prefix": ""
+    }
 }

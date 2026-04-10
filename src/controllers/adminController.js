@@ -7,6 +7,8 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt'); // Ajout de bcrypt pour la sécurité
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 class AdminController {
 
@@ -23,17 +25,23 @@ class AdminController {
                 const match = await bcrypt.compare(password, dbHash);
 
                 if (match) {
-                    req.session.user_id = user.id;
-                    req.session.user_role = user.role;
-                    console.log(req.session)
-                    return res.json({ 
-                        success: true, 
+                    const token = jwt.sign(
+                        {
+                            id: user.id,
+                            role: user.role,
+                            email: user.email
+                        }, process.env.JWT_SECRET,
+                        { expiresIn: "24h"}
+                    )
+                    return res.json({
+                        success: true,
                         message: "Authentification admin réussie",
-                        redirect: '/admin/backoffice' // On donne l'indice au front
+                        redirect: '/admin/backoffice' ,// On donne l'indice au front
+                        token: token
                     });
                 }
             }
-            
+
             return res.status(401).json({ success: false, message: "Identifiants incorrects ou accès refusé." });
         } catch (error) {
             res.status(500).json({ success: false, message: "Erreur serveur lors de la connexion." });
@@ -65,23 +73,23 @@ class AdminController {
 
             res.json({ success: true, stats, inscriptions });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur lors de la récupération des stats.\nerror : "+ error });
+            res.status(500).json({ success: false, message: "Erreur lors de la récupération des stats.\nerror : " + error });
         }
     }
 
     // --- GESTION UTILISATEURS (JSON) ---
     async gestionUser(req, res) {
         const { search, sort = 'id', order = 'asc' } = req.query;
-        
+
         try {
-            
+
             const users = await utilisateurRepo.getFilteredUsers(search, ['apprenant'], sort, order);
             const formateurs = await formateurRepo.getFilteredFormateurs(search, sort, order);
             const admins = await utilisateurRepo.getFilteredUsers(search, ['admin', 'moderator'], sort, order);
 
             res.json({ success: true, data: { users, formateurs, admins }, filters: { search, sort, order } });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur de filtrage.\nerror: "+error });
+            res.status(500).json({ success: false, message: "Erreur de filtrage.\nerror: " + error });
         }
     }
 
@@ -125,7 +133,7 @@ class AdminController {
 
             await formateurRepo.updateCode(id, code);
             await journalRepo.insert(req.session.user_id, 'Envoi code', `Code ${code} envoyé à ${formateur.email}`);
-            
+
             res.json({ success: true, message: `Code envoyé avec succès à ${formateur.email}` });
         } catch (error) {
             res.status(500).json({ success: false, message: "Erreur lors de l'envoi de l'email." });
@@ -142,9 +150,9 @@ class AdminController {
             const doc = new PDFDocument({ layout: 'landscape', size: 'A4' });
             const filename = `certificat_${apprenant_id}_${cours_id}.pdf`;
             const uploadDir = path.join(__dirname, '../../uploads/certificats/');
-            
+
             if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-            
+
             const filePath = path.join(uploadDir, filename);
             const stream = fs.createWriteStream(filePath);
 
@@ -156,14 +164,14 @@ class AdminController {
 
             stream.on('finish', () => {
                 // Retourne du JSON avec le lien vers le fichier généré
-                res.json({ 
-                    success: true, 
-                    message: "Certificat généré avec succès", 
-                    downloadUrl: `/uploads/certificats/${filename}` 
+                res.json({
+                    success: true,
+                    message: "Certificat généré avec succès",
+                    downloadUrl: `/uploads/certificats/${filename}`
                 });
             });
         } catch (error) {
-            res.status(500).json({ success: false, message: "Erreur lors de la génération du PDF.\nerror: "+error });
+            res.status(500).json({ success: false, message: "Erreur lors de la génération du PDF.\nerror: " + error });
         }
     }
 }

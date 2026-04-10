@@ -4,20 +4,21 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 
-app.use(cors({
-    origin: 'http://localhost:5173', // L'URL de votre front-end (ex: Vite/React)
-    credentials: true // <--- INDISPENSABLE pour les sessions
-}));
+
 
 // --- 1. MIDDLEWARES DE BASE ---
 // Remplace $_POST et $_GET
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors({
+    origin: '*', // L'URL de votre front-end (ex: Vite/React)
+    credentials: true // <--- INDISPENSABLE pour les sessions
+}));
 
 // Configuration de la session (Équivalent PHP $_SESSION)
 app.use(session({
     secret: 'votre_cle_secrete_yitro',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: { secure: false } // Mettre à true si vous passez en HTTPS
 }));
