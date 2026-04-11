@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/logout",
-    "sortOrder": 33,
+    "sortOrder": 34,
     "parameters": [],
     "pathParameters": []
 }

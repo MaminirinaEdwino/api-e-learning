@@ -8,7 +8,6 @@ class JournalController {
     async markNotificationsRead(req, res) {
         try {
             await journalRepo.markRead(req.user.id);
-            
             res.json({
                 message: "Notification read"
             });
@@ -30,7 +29,7 @@ class JournalController {
 
             const activites = await journalRepo.getFilterLog(search, sort, order);
 
-            res.render('journal/list', {
+            res.json({
                 activites: activites,
                 sort: sort,
                 search: search,

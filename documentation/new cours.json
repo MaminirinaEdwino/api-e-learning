@@ -54,7 +54,7 @@
         ]
     },
     "url": "{{host}}/cours/new",
-    "sortOrder": 11,
+    "sortOrder": 12,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
