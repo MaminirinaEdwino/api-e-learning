@@ -433,6 +433,23 @@ class CoursRepositories {
             throw error;
         }
     }
+    async getCoursByFormateur(formateurId) {
+    try {
+        const cours = await Cours.findAll({
+            where: {
+                formateur_id: formateurId
+            },
+            // raw: true permet d'obtenir un tableau d'objets simples 
+            // (équivalent à PDO::FETCH_ASSOC)
+            raw: true 
+        });
+
+        return cours;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des cours du formateur :", error);
+        throw error;
+    }
+}
 }
 
 module.exports = new CoursRepositories();

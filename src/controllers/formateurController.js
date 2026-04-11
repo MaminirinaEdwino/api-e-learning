@@ -54,7 +54,7 @@ class FormateurController {
      * Détails de la progression des apprenants par cours
      */
     async progressionApprenant(req, res) {
-        const formateurId = req.session.formateur_id;
+        const formateurId = req.user.id;
 
         try {
             const cours = await coursRepo.getCoursByFormateur(formateurId);
@@ -86,14 +86,14 @@ class FormateurController {
                 }
             }));
 
-            res.render('espaceformateur/progressionApprenant', {
+            res.json({
                 cours: cours,
                 progression: progression
             });
 
         } catch (error) {
             console.error("Erreur Progression Apprenant:", error);
-            res.status(500).send("Erreur lors du calcul des progressions.");
+            res.status(500).send("Erreur lors du calcul des progressions."+error);
         }
     }
 }
