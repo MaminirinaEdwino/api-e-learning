@@ -84,14 +84,18 @@ class AdminFormationController {
             await formationRepo.update(id, { nom_formation: nouveau_nom.trim() });
             
             await journalRepo.insert({
-                utilisateur_id: req.session.user_id,
+                admin_id: req.user.id,
                 action: 'Modification Formation',
                 details: `Modification formation ID ${id} vers: ${nouveau_nom}`
             });
 
-            res.redirect('/gestion/formation');
+            res.json({
+                admin_id: req.user.id,
+                action: 'Modification Formation',
+                details: `Modification formation ID ${id} vers: ${nouveau_nom}`
+            })
         } catch (error) {
-            res.status(500).send("Erreur modification.");
+            res.status(500).send("Erreur modification.\n"+error);
         }
     }
 

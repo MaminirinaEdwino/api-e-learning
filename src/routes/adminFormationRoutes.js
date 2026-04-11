@@ -31,7 +31,7 @@ router.get('/gestion/formation/:id', verifyToken, isAdmin, async (req, res) => {
 // Routes d'action (POST)
 router.post('/formation/new', verifyToken, isAdmin, adminCtrl.createFormation);
 router.post('/sousformation/new', verifyToken, isAdmin, adminCtrl.createSousFormation);
-router.post('/formation/edit/:id', verifyToken, isAdmin, adminCtrl.updateFormation);
+router.put('/formation/edit/:id', verifyToken, isAdmin, adminCtrl.updateFormation);
 
 // Routes de suppression
 router.get('/formation/delete/:id', verifyToken, isAdmin, async (req, res) => {
