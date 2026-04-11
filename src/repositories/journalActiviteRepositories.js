@@ -132,10 +132,6 @@ class JournalActiviteRepositories {
      */
     async getLastLogs(limit = 5) {
         return await JournalActivite.findAll({
-            include: [{
-                model: User,
-                attributes: ['nom']
-            }],
             order: [['created_at', 'DESC']],
             limit: limit,
             raw: true,

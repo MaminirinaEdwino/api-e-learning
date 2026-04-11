@@ -51,6 +51,20 @@ class UtilisateurRepositories {
      * Équivalent de CountUserPerMonth
      * Format mois attendu : "YYYY-MM"
      */
+    async countApprenant() {
+        try {
+            const count = await User.count({
+                where: {
+                    role: 'apprenant'
+                }
+            });
+
+            return count;
+        } catch (error) {
+            console.error("Erreur lors du comptage des apprenants :", error);
+            throw error;
+        }
+    }
     async countApprenantsByMonth(mois) {
         return await User.count({
             where: {

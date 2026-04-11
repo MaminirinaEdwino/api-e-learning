@@ -132,6 +132,16 @@ class FormateurRepositories {
             { where: { id: id } }
         );
     }
+    async countFormateur() {
+        try {
+            const count = await Formateur.count();
+
+            return count;
+        } catch (error) {
+            console.error("Erreur lors du comptage des apprenants :", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = new FormateurRepositories();

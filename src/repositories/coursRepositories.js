@@ -135,6 +135,16 @@ class CoursRepositories {
         });
         return result ? result.id : null;
     }
+    async countCours() {
+        try {
+            const count = await Cours.count();
+
+            return count;
+        } catch (error) {
+            console.error("Erreur lors du comptage des apprenants :", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = new CoursRepositories();

@@ -55,12 +55,12 @@ class AdminController {
                 newApprenant: await utilisateurRepo.getNewApprenantCount(),
                 newFormateur: await formateurRepo.getNewFormateursCount(),
                 newCours: await coursRepo.getNewCoursCount(),
-                inactiveUsers: await utilisateurRepo.getInactiveUsers(),
+                // inactiveUsers: await utilisateurRepo.getInactiveUsers(),
                 apprenantCount: await utilisateurRepo.countApprenant(),
                 formateursCount: await formateurRepo.countFormateur(),
                 coursCount: await coursRepo.countCours(),
-                activiteLog: await journalRepo.countLog(),
-                lastLog: await journalRepo.getLastLogs()
+                // activiteLog: await journalRepo.countLog(),
+                // lastLog: await journalRepo.getLastLogs()
             };
 
             const inscriptions = {};
