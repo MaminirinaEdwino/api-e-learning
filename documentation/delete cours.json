@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/cours/delete/29",
-    "sortOrder": 5,
+    "sortOrder": 6,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

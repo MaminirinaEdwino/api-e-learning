@@ -16,7 +16,9 @@ class ForumController {
                 description: description ? description.trim() : ''
             });
 
-            res.redirect('/espace/apprenant');
+            res.json({
+                message: "forum created"
+            });
         } catch (error) {
             console.error("Erreur création forum:", error);
             res.status(500).send("Erreur lors de la création du forum.");

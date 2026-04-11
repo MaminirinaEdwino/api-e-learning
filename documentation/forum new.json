@@ -1,13 +1,20 @@
 {
     "_type": "request",
-    "method": "GET",
+    "method": "POST",
     "body": {
-        "mimeType": "No Body"
+        "mimeType": "application/json",
+        "text": "{\n    \"titre\": \"titre foqsdmlf\",\n    \"description\": \"qmsldkjf\",\n    \"cours_id\": 4\n}"
     },
-    "url": "{{host}}/espace/formateur",
-    "sortOrder": 2,
+    "url": "{{host}}/forum/new",
+    "sortOrder": 1,
     "parameters": [],
     "pathParameters": [],
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ],
     "authentication": {
         "type": "bearer",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
