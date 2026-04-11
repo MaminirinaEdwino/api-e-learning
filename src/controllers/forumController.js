@@ -28,7 +28,7 @@ class ForumController {
     // --- VUE FORMATEUR : FORUMS D'UN COURS ---
     async listForumsByCours(req, res) {
         const cours_id = parseInt(req.params.id);
-        const formateur_id = req.session.formateur_id;
+        const formateur_id = req.user.id;
 
         try {
             const cours = await coursRepo.getFormateurCours(cours_id, formateur_id);
@@ -40,15 +40,15 @@ class ForumController {
                 posts[forum.id] = await postRepo.getPostFormateurIndicator(forum.id);
             }));
 
-            res.render('forum/forumCoursFormateur', {
-                cours_id,
-                cours,
-                forums,
-                posts
+            res.json({
+                cours_id: cours_id,
+                cours: cours,
+                forums: forums,
+                posts: posts
             });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur chargement des forums.");
+            res.status(500).send("Erreur chargement des forums."+error);
         }
     }
 

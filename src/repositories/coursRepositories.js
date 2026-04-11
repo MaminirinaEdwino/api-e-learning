@@ -434,19 +434,38 @@ class CoursRepositories {
         }
     }
     async getCoursByFormateur(formateurId) {
+        try {
+            const cours = await Cours.findAll({
+                where: {
+                    formateur_id: formateurId
+                },
+                // raw: true permet d'obtenir un tableau d'objets simples 
+                // (équivalent à PDO::FETCH_ASSOC)
+                raw: true
+            });
+
+            return cours;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des cours du formateur :", error);
+            throw error;
+        }
+    }
+    async getFormateurCours(coursId, formateurId) {
     try {
-        const cours = await Cours.findAll({
+        const cours = await Cours.findOne({
             where: {
+                id: coursId,
                 formateur_id: formateurId
             },
-            // raw: true permet d'obtenir un tableau d'objets simples 
-            // (équivalent à PDO::FETCH_ASSOC)
-            raw: true 
+            // On ne récupère que le titre comme dans ton code PHP
+            attributes: ['titre'],
+            raw: true
         });
 
+        // Retourne l'objet { titre: "..." } ou null s'il n'y a pas de correspondance
         return cours;
     } catch (error) {
-        console.error("Erreur lors de la récupération des cours du formateur :", error);
+        console.error("Erreur lors de la vérification de propriété du cours :", error);
         throw error;
     }
 }

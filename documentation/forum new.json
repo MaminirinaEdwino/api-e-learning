@@ -6,7 +6,7 @@
         "text": "{\n    \"titre\": \"titre foqsdmlf\",\n    \"description\": \"qmsldkjf\",\n    \"cours_id\": 4\n}"
     },
     "url": "{{host}}/forum/new",
-    "sortOrder": 1,
+    "sortOrder": 2,
     "parameters": [],
     "pathParameters": [],
     "headers": [

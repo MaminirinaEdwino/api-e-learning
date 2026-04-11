@@ -19,7 +19,7 @@ const isLogged = (req, res, next) => {
 
 // Routes
 router.post('/forum/new', verifyToken, isLogged, forumCtrl.createForum);
-router.get('/forum/cours/:id', verifyToken,isFormateur, forumCtrl.listForumsByCours);
-router.get('/espace/apprenant/forum/:id', verifyToken,isLogged, forumCtrl.showForumApprenant);
+router.get('/forum/cours/:id', verifyToken, isFormateur, forumCtrl.listForumsByCours);
+router.get('/espace/apprenant/forum/:id', verifyToken, isLogged, forumCtrl.showForumApprenant);
 
 module.exports = router;

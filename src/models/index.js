@@ -56,7 +56,17 @@ User.hasMany(LeconCompletee, { foreignKey: 'utilisateur_id' });
 LeconCompletee.belongsTo(User, { foreignKey: 'utilisateur_id' });
 Lecon.hasMany(LeconCompletee, { foreignKey: 'lecon_id' });
 LeconCompletee.belongsTo(Lecon, { foreignKey: 'lecon_id' });
+User.hasOne(Formateur, {
+    foreignKey: 'email',
+    sourceKey: 'email',
+    as: 'infosFormateur' // Alias pour éviter les confusions
+});
 
+// Un Formateur appartient à un Utilisateur
+Formateur.belongsTo(User, {
+    foreignKey: 'email',
+    targetKey: 'email'
+});
 // Forum & Posts
 Cours.hasMany(Forum, { foreignKey: 'cours_id' });
 Forum.belongsTo(Cours, { foreignKey: 'cours_id' });
@@ -89,6 +99,7 @@ ForumMessage.belongsTo(User, { foreignKey: 'utilisateur_id', as: 'auteur' });
 // Un cours possède ses propres messages de forum
 Cours.hasMany(ForumMessage, { foreignKey: 'cours_id' });
 ForumMessage.belongsTo(Cours, { foreignKey: 'cours_id' });
+
 
 
 const db = {

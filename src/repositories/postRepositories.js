@@ -1,6 +1,6 @@
 const { literal } = require('sequelize');
 
-const {Post, User, Formateur} = require('../models/index')
+const { Post, User, Formateur } = require('../models/index')
 class PostRepositories {
 
     /**
@@ -86,25 +86,40 @@ class PostRepositories {
      * Équivalent de GetPostFormateurIndicator
      */
     async getPostFormateurIndicator(forumId) {
-        return await Post.findAll({
-            where: { forum_id: forumId },
-            attributes: [
-                'id', 'contenu', 'date_post',
-                [literal('COALESCE("Utilisateur->Formateur"."nom_prenom", "Utilisateur"."nom")'), 'auteur_nom'],
-                [literal('CASE WHEN "Utilisateur->Formateur"."id" IS NOT NULL THEN 1 ELSE 0 END'), 'is_formateur']
-            ],
-            include: [{
-                model: User,
-                attributes: [],
+        try {
+            const posts = await Post.findAll({
+                where: { forum_id: forumId },
                 include: [{
-                    model: Formateur,
-                    attributes: [],
-                    on: literal('"Utilisateur"."email" = "Utilisateur->Formateur"."email"')
-                }]
-            }],
-            order: [['date_post', 'ASC']],
-            raw: true
-        });
+                    model: User,
+                    include: [{
+                        model: Formateur,
+                        as: 'infosFormateur', // L'alias défini plus haut
+                        required: false // Force le LEFT JOIN
+                    }]
+                }],
+                order: [['date_post', 'ASC']]
+            });
+
+            // On formate les données en sortie pour retrouver la structure PHP
+            return posts.map(p => {
+                const user = p.User;
+                const formateur = user ? user.infosFormateur : null;
+
+                return {
+                    id: p.id,
+                    contenu: p.contenu,
+                    date_post: p.date_post,
+                    // COALESCE(f.nom_prenom, u.nom)
+                    auteur_nom: formateur ? formateur.nom_prenom : (user ? user.nom : 'Anonyme'),
+                    // CASE WHEN f.id IS NOT NULL
+                    is_formateur: formateur ? 1 : 0
+                };
+            });
+
+        } catch (error) {
+            console.error("Erreur dans getPostFormateurIndicator :", error);
+            throw error;
+        }
     }
 }
 
