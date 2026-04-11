@@ -9,7 +9,7 @@ class CoursController {
 
     // --- CRÉATION DE COURS (POST) ---
     async createCours(req, res) {
-        const formateurId = req.session.formateur_id;
+        const formateurId = req.user.id;
         const uploadDir = './Uploads/cours/';
         const leconUploadDir = './Uploads/lecons/';
 
@@ -18,9 +18,11 @@ class CoursController {
 
             // 1. Gestion de la photo du cours
             let photoFilename = null;
-            if (req.files && req.files['photo_cours']) {
-                const photo = req.files['photo_cours'][0];
+            console.log(req.files[0].originalname)
+            if (req.files && req.files[0].fieldname =="photo_cours") {
+                const photo = req.files[0];
                 photoFilename = `course_${Date.now()}${path.extname(photo.originalname)}`;
+                console.lo
                 fs.writeFileSync(path.join(uploadDir, photoFilename), photo.buffer);
             }
 
@@ -76,7 +78,9 @@ class CoursController {
                 }
             }
 
-            res.redirect('/cours/formateur');
+            res.json({
+                message: "Cours created"
+            });
         } catch (error) {
             console.error(error);
             res.status(500).send("Erreur lors de la création du cours : " + error.message);

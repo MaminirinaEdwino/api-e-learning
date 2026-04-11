@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const coursCtrl = require('../controllers/coursController');
 const verifyToken = require('../middlewares/authMiddleware');
-const formationRepo = require('../repositories/formationRepositories');
+const coursRepo = require('../repositories/coursRepositories');
 
 // Configuration Multer pour la mémoire (plus simple pour traiter les fichiers ensuite)
 const storage = multer.memoryStorage();
@@ -20,9 +20,9 @@ const isFormateur = (req, res, next) => {
 
 // Routes
 router.get('/cours', verifyToken, isFormateur, async (req, res) => {
-    const formations = await formationRepo.getAllByNom();
+    const cours = await coursRepo.getAll();
     res.json({
-        formations: formations
+        cours: cours
     });
 });
 

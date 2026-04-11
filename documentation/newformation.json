@@ -6,7 +6,7 @@
         "text": "{\n    \"nom_formation\":\"teste lave be sdfdtydf\"\n}"
     },
     "url": "{{host}}/formation/new",
-    "sortOrder": 12,
+    "sortOrder": 13,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
