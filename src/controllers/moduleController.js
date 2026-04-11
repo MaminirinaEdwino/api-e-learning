@@ -4,14 +4,28 @@ const leconRepo = require('../repositories/leconRepositories');
 
 class ModuleController {
 
-    // --- ÉDITION (GET) ---
-    async renderEdit(req, res) {
-        const { id } = req.params;
-        const module = await moduleRepo.getById(id);
-        res.render('modules/edit', {
-            id: id,
-            module: module
-        });
+    async getAll(req, res) {
+        let modules = await moduleRepo.getAll()
+        res.json({
+            modules
+        })
+    }
+
+    async create(req, res) {
+        const { cours_id, titre, description } = req.body
+
+        try {
+            await moduleRepo.insert({
+                cours_id: cours_id,
+                titre: titre,
+                description: description
+            })
+            res.json({
+                message: "module created"
+            })
+        } catch (error) {
+            res.status(500).send("Erreur lors de la creation du module." + error);
+        }
     }
 
     // --- ÉDITION (POST) ---
@@ -21,7 +35,11 @@ class ModuleController {
 
         try {
             await moduleRepo.update(id, { titre, description });
-            res.redirect('/cours/formateur');
+            res.json({
+                id: id,
+                titre: titre,
+                description: description
+            });
         } catch (error) {
             res.status(500).send("Erreur lors de la mise à jour.");
         }
@@ -36,7 +54,9 @@ class ModuleController {
             await leconRepo.deleteByModuleId(id);
             await moduleRepo.delete(id);
 
-            res.redirect('/cours/formateur');
+            res.json({
+                message: "module deleted"
+            });
         } catch (error) {
             res.status(500).send("Erreur lors de la suppression.");
         }
@@ -55,7 +75,7 @@ class ModuleController {
     // --- API : MARQUER COMME TERMINÉ (POST JSON) ---
     async toggleCompletion(req, res) {
         const { module_id, cours_id, is_checked } = req.body;
-        const utilisateur_id = req.session.user_id;
+        const utilisateur_id = req.user.id;
 
         if (!module_id || !cours_id || is_checked === undefined) {
             return res.status(400).json({ success: false, message: 'Données manquantes' });

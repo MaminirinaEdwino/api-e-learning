@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "method": "POST",
+    "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cours_id\": 4,\n    \"module_id\": 15,\n    \"is_checked\": true\n}"
+    },
+    "url": "{{host}}/module/complete",
+    "sortOrder": 1,
+    "parameters": [],
+    "pathParameters": [],
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+    }
+}

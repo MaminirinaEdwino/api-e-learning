@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/notification/read",
-    "sortOrder": 0,
+    "sortOrder": 6,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

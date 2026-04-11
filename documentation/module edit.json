@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "method": "PUT",
+    "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"titre\": \"module de cours 4 edit\",\n    \"description\": \"description de module cours 4\"\n}"
+    },
+    "url": "{{host}}/module/edit/15",
+    "sortOrder": 2,
+    "parameters": [],
+    "pathParameters": [],
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+    }
+}

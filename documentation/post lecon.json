@@ -34,7 +34,7 @@
         ]
     },
     "url": "{{host}}/lecon/new/",
-    "sortOrder": 2,
+    "sortOrder": 8,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

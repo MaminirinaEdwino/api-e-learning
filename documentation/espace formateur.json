@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/espace/formateur",
-    "sortOrder": 12,
+    "sortOrder": 18,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

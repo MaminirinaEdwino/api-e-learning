@@ -108,6 +108,44 @@ class ModuleRepositories {
             where: { cours_id: cours_id }
         });
     }
+    async getByCoursIdArray(coursId) {
+        try {
+            const modules = await Module.findAll({
+                where: {
+                    cours_id: coursId
+                },
+                // Comme en PHP (SELECT *), on récupère tous les champs
+                // raw: true permet de retourner un tableau d'objets simples
+                raw: true,
+                // Optionnel : Trier les modules si tu as une colonne 'ordre'
+                order: [['id', 'ASC']]
+            });
+
+            return modules;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des modules du cours :", error);
+            throw error;
+        }
+    }
+    async getByIdCoursId(moduleId, coursId) {
+        try {
+            const module = await Module.findOne({
+                where: {
+                    id: moduleId,
+                    cours_id: coursId
+                },
+                // On ne récupère que l'ID comme dans ton code PHP
+                attributes: ['id'],
+                raw: true
+            });
+
+            // Retourne { id: ... } ou null si la correspondance n'existe pas
+            return module;
+        } catch (error) {
+            console.error("Erreur lors de la vérification du module/cours :", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = new ModuleRepositories();
