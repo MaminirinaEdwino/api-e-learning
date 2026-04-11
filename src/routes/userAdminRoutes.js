@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const userAdminCtrl = require('../controllers/userAdminController');
-
+const verifyToken = require('../middlewares/authMiddleware');
 // Middleware pour restreindre l'accès aux administrateurs
 const isAdmin = (req, res, next) => {
-    if (req.session.logged_in && req.session.user_role === 'admin') {
+    if (req.user && req.user.role === 'admin') {
         return next();
     }
-    res.redirect('/admin/login');
+    res.json({
+        message:"Not authenticated"
+    });
 };
 
 // Routes de gestion des comptes
-router.post('/user/deactivate', isAdmin, userAdminCtrl.deactivate);
-router.post('/user/activate/:id', isAdmin, userAdminCtrl.toggleStatus);
-router.get('/user/delete/:id', isAdmin, userAdminCtrl.deleteUser);
+router.post('/user/deactivate',verifyToken, isAdmin, userAdminCtrl.deactivate);
+router.post('/user/activate/:id',verifyToken, isAdmin, userAdminCtrl.toggleStatus);
+router.delete('/user/delete/:id',verifyToken, isAdmin, userAdminCtrl.deleteUser);
 
 module.exports = router;

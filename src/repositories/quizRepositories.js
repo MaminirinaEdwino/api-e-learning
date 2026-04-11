@@ -1,6 +1,6 @@
 const { literal } = require('sequelize');
 
-const {Quiz, Module, Cours} = require('../models/index')
+const { Quiz, Module, Cours, Question } = require('../models/index')
 
 class QuizRepositories {
 
@@ -145,6 +145,52 @@ class QuizRepositories {
             nest: true
         });
     }
+    async getCoursQuizByFormateurId(formateurId) {
+        try {
+            const quizList = await Quiz.findAll({
+                include: [
+                    {
+                        model: Module,
+                        as: 'Module', // Vérifie l'alias dans tes associations
+                        include: [
+                            {
+                                model: Cours,// Vérifie si c'est 'Cours' ou 'Cour' dans ton index.js
+                                where: { formateur_id: formateurId },
+                                attributes: ['titre']
+                            }
+                        ],
+                        attributes: ['titre']
+                    },
+                    {
+                        model: Question, // Doit correspondre à l'alias de Quiz.hasMany(Question)
+                        attributes: ["id", "texte", "reponse_correcte", "reponse_incorrecte_1", "reponse_incorrecte_2", "reponse_incorrecte_3"] // On ne prend que l'ID pour pouvoir compter
+                    }
+                ]
+            });
+
+            // On formate la sortie pour correspondre exactement à ce que ton PHP renvoyait
+            return quizList.map(q => {
+                const quizData = q.toJSON(); // Convertit l'instance Sequelize en objet simple
+                console.log(quizData.Questions)
+                return {
+                    id: quizData.id,
+                    titre: quizData.titre,
+                    description: quizData.description,
+                    score_minimum: quizData.score_minimum,
+                    // On accède aux données via les objets imbriqués
+                    cours_titre: quizData.Module?.Cour?.titre || 'Sans cours',
+                    module_titre: quizData.Module?.titre || 'Sans module',
+                    // On compte simplement la longueur du tableau de questions
+                    questions: quizData.Questions 
+                };
+            });
+
+        } catch (error) {
+            console.error("Erreur détaillée dans getCoursQuizByFormateurId :", error.parent?.sqlMessage || error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = new QuizRepositories();

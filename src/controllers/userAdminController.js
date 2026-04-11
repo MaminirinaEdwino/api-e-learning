@@ -8,19 +8,18 @@ class UserAdminController {
     async deactivate(req, res) {
         try {
             const userId = parseInt(req.body.deactivate_user_id);
-            
-            // Vérification de l'existence de la colonne 'active' avant modification
-            const hasActiveColumn = await userRepo.hasActiveCol();
-            
-            if (hasActiveColumn) {
-                await userRepo.deactiveUser(userId);
-                await journalRepo.deactivateUser(userId);
-            }
 
-            res.redirect('/admin/backoffice');
+            // Vérification de l'existence de la colonne 'active' avant modification
+
+            await userRepo.deactivateUser(userId);
+            await journalRepo.logDeactivation(userId);
+            res.json({
+                message: "user deativate",
+                id: userId
+            });
         } catch (error) {
             console.error("Erreur désactivation :", error);
-            res.status(500).send("Erreur lors de la désactivation de l'utilisateur.");
+            res.status(500).send("Erreur lors de la désactivation de l'utilisateur." + error);
         }
     }
 
@@ -30,14 +29,16 @@ class UserAdminController {
     async toggleStatus(req, res) {
         try {
             const targetId = parseInt(req.params.id);
-            const adminId = req.session.user_id;
+            const adminId = req.user.id;
 
             await userRepo.toggleActive(adminId, targetId);
-            
-            res.redirect('/admin/gestionuser');
+
+            res.json({
+                message: "user active"
+            });
         } catch (error) {
             console.error("Erreur toggle status :", error);
-            res.status(500).send("Erreur lors du changement de statut.");
+            res.status(500).send("Erreur lors du changement de statut."+error);
         }
     }
 
@@ -47,16 +48,15 @@ class UserAdminController {
     async deleteUser(req, res) {
         try {
             const id = parseInt(req.params.id);
-            const user = await userRepo.getById(id);
+
             
-            if (user) {
-                await userRepo.delete(id);
-            }
-            
-            res.redirect('/admin/gestionuser');
+            await userRepo.delete(id);
+            res.json({
+                message: "user deleted"
+            });
         } catch (error) {
             console.error("Erreur suppression utilisateur :", error);
-            res.status(500).send("Erreur lors de la suppression.");
+            res.status(500).send("Erreur lors de la suppression." + error);
         }
     }
 }

@@ -6,7 +6,7 @@
         "text": "{\n    \"cours_id\": 4,\n    \"module_id\": 15,\n    \"is_checked\": true\n}"
     },
     "url": "{{host}}/module/complete",
-    "sortOrder": 2,
+    "sortOrder": 13,
     "parameters": [],
     "pathParameters": [],
     "headers": [

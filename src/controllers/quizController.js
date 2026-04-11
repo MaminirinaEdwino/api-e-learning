@@ -5,32 +5,11 @@ const coursRepo = require('../repositories/coursRepositories');
 const moduleRepo = require('../repositories/moduleRepositories');
 
 class QuizController {
-    
-    // --- VUE APPRENANT : PASSER UN QUIZ ---
-    async renderTakeQuiz(req, res) {
-        const quizId = parseInt(req.params.id);
-        const userId = req.session.user_id;
-
-        try {
-            const quiz = await quizRepo.getCoursModuleQuizByQuiz(quizId);
-            const isEnrolled = await inscriptionRepo.getEnrolledCours(userId, quiz.cours_id);
-            const questions = await questionRepo.getByQuizId(quizId);
-
-            res.render('quiz/takequiz', {
-                is_enrolled: isEnrolled,
-                quiz,
-                questions,
-                quiz_id: quizId
-            });
-        } catch (error) {
-            res.status(500).send("Erreur lors de l'accès au quiz.");
-        }
-    }
 
     // --- LISTE FORMATEUR ---
     async listByFormateur(req, res) {
-        const quiz = await quizRepo.getCoursQuizByFormateurId(req.session.formateur_id);
-        res.render('quiz/list', { quiz });
+        const quiz = await quizRepo.getCoursQuizByFormateurId(req.user.id);
+        res.json({ quiz });
     }
 
     // --- CRÉATION (POST) ---
@@ -60,9 +39,18 @@ class QuizController {
                 }
             }
 
-            res.redirect('/quiz/formateur');
+            res.json({
+                message: "quiz created",
+                quiz: {
+                    module_id,
+                    titre: titre_quiz,
+                    description: description_quiz,
+                    score_minimum: score_minimum,
+                    questions: questions
+                }
+            });
         } catch (error) {
-            res.status(500).send("Erreur lors de la création du quiz.");
+            res.status(500).send("Erreur lors de la création du quiz."+error);
         }
     }
 
@@ -96,7 +84,13 @@ class QuizController {
                 }
             }
 
-            res.redirect('/quiz/formateur');
+            res.json({
+                module_id,
+                titre: titre_quiz,
+                description: description_quiz,
+                score_minimum,
+                questions
+            });
         } catch (error) {
             res.status(500).send("Erreur lors de la modification.");
         }
@@ -106,7 +100,9 @@ class QuizController {
     async deleteQuiz(req, res) {
         try {
             await quizRepo.delete(req.params.id);
-            res.redirect('/quiz/formateur');
+            res.json({
+                message: "quiz deleted"
+            });
         } catch (error) {
             res.status(500).send("Erreur suppression.");
         }

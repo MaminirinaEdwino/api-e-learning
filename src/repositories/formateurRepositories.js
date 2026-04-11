@@ -22,7 +22,7 @@ class FormateurRepositories {
     async checkCode(email, entryCode) {
         return await Formateur.findOne({
             where: {
-                email: { [Op.iLike]: email }, // Case-insensitive
+                email: email, // Case-insensitive
                 code_entree: entryCode
             }
         });
@@ -40,13 +40,16 @@ class FormateurRepositories {
 
     // Équivalent de ResetCodeStmt (Finalisation de l'inscription/Reset)
     async resetCodeAndActivate(email, nom_prenom, hashedPassword) {
+        console.log(hashedPassword, "hash")
         return await Formateur.update({
             nom_prenom: nom_prenom,
             password: hashedPassword,
             statut: 'en_attente',
             code_entree: null
         }, {
-            where: literal(`LOWER(email) = LOWER('${email}')`)
+            where:  {
+                email: email
+            }
         });
     }
 

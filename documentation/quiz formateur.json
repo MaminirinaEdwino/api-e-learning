@@ -1,0 +1,15 @@
+{
+    "_type": "request",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "url": "{{host}}/quiz/formateur",
+    "sortOrder": 7,
+    "parameters": [],
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+    }
+}

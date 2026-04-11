@@ -1,0 +1,17 @@
+{
+    "_type": "request",
+    "method": "POST",
+    "body": {
+        "mimeType": "No Body",
+        "text": "{\n    \"deactivate_user_id\": 5\n}"
+    },
+    "url": "{{host}}/user/activate/5",
+    "sortOrder": 1,
+    "parameters": [],
+    "pathParameters": [],
+    "headers": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+    }
+}

@@ -51,6 +51,7 @@ const formateurRoutes = require('./src/routes/formateurRoutes');
 const leconRoutes = require('./src/routes/leconRoutes');
 const moduleRoutes = require('./src/routes/moduleRoutes');
 const postRoutes = require('./src/routes/postRoutes');
+const sousFormationRoutes = require('./src/routes/sousFormationRoutes')
 
 // --- 4. UTILISATION DES ROUTES ---
 app.use(authRoutes);
@@ -71,6 +72,7 @@ app.use(formateurRoutes);
 app.use(leconRoutes);
 app.use(moduleRoutes);
 app.use(postRoutes);
+app.use(sousFormationRoutes);
 
 // --- 5. GESTION DES ERREURS 404 ---
 app.use((req, res) => {

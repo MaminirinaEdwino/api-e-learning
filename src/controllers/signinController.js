@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 
+
 class SigninController {
 
     // --- FLUX APPRENANT ---
@@ -43,17 +44,19 @@ class SigninController {
                 charte: req.body.charte ? 1 : 0
             });
 
-            res.redirect('/merci');
+            res.json({
+                message: "apprenant created"
+            })
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors de l'inscription.");
+            res.status(500).send("Erreur lors de l'inscription."+error);
         }
     }
 
     // --- FLUX FINALISATION FORMATEUR ---
     async confirmFormateur(req, res) {
         const { nom_prenom, email, password, confirm_password, entryCode } = req.body;
-        const cleanCode = entryCode.replace(/\s+/g, '');
+        const cleanCode = entryCode;
 
         if (password !== confirm_password) return res.status(400).send("Mots de passe différents.");
 
@@ -67,16 +70,21 @@ class SigninController {
             const hashedPassword = await bcrypt.hash(password, 10);
             
             // Mise à jour et reset du code (Logique RESET_CODE_STMT)
-            const success = await formateurRepo.resetCodeAndActivate(nom_prenom, hashedPassword, email);
+            const success = await formateurRepo.resetCodeAndActivate(email,nom_prenom, hashedPassword);
             
             if (success) {
                 req.session.inscription_formateur_ok = "Inscription réussie.";
-                res.redirect('/connexion');
+                res.json({
+                    success: true,
+                    message: "Confirmation ok"
+                });
             } else {
-                res.redirect('/signin/formateur');
+                res.json({
+                    message: "check your access code in your mail"
+                });
             }
         } catch (error) {
-            res.status(500).send("Erreur serveur.");
+            res.status(500).send("Erreur serveur."+error);
         }
     }
 
@@ -86,7 +94,7 @@ class SigninController {
             let cvNom = "";
             if (req.file) {
                 cvNom = `${Date.now()}_${req.file.originalname}`;
-                fs.writeFileSync(path.join(__dirname, '../../Uploads/cv/', cvNom), req.file.buffer);
+                fs.writeFileSync(path.join('./Uploads/cv/', cvNom), req.file.buffer);
             }
 
             // Mapping des données (implode pour les tableaux)
@@ -94,7 +102,7 @@ class SigninController {
             const formats = Array.isArray(req.body.formats) ? req.body.formats.join(", ") : "";
             const valeurs = Array.isArray(req.body.valeurs) ? req.body.valeurs.join(", ") : "";
 
-            await formateurRepo.insertCandidature({
+            await formateurRepo.insert({
                 ...req.body,
                 cv_nom: cvNom,
                 categories,
@@ -103,9 +111,11 @@ class SigninController {
                 statut: "en_attente"
             });
 
-            res.send("<script>alert('Candidature envoyée'); window.location='/signin/formateur';</script>");
+            res.json({
+                "message": "candidature sent"
+            });
         } catch (error) {
-            res.status(500).send("Erreur lors de la candidature.");
+            res.status(500).send("Erreur lors de la candidature."+error);
         }
     }
 }

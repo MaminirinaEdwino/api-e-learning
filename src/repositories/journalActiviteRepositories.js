@@ -153,6 +153,21 @@ class JournalActiviteRepositories {
             throw error;
         }
     }
+    async logDeactivation(adminId, targetUserId) {
+    try {
+        // .create() génère l'INSERT INTO journal_activite...
+        await JournalActivite.create({
+            admin_id: adminId,
+            action: 'Désactivation de compte',
+            details: `Utilisateur ID: ${targetUserId}`
+        });
+
+        return true;
+    } catch (error) {
+        console.error("Erreur lors du log de désactivation :", error);
+        throw error;
+    }
+}
 }
 
 module.exports = new JournalActiviteRepositories();

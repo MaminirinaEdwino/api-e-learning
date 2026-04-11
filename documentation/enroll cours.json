@@ -6,7 +6,7 @@
         "text": "{\n    \"cours_id\": 22,\n    \"references_payement\": \"msqldkfj\",\n    \"method_payement\": \"Mvola\"\n}"
     },
     "url": "{{host}}/enroll/cours",
-    "sortOrder": 26,
+    "sortOrder": 37,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

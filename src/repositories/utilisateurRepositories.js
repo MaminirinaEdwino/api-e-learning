@@ -8,7 +8,7 @@ class UtilisateurRepositories {
      * Équivalent de Insert
      */
     async insert(data) {
-        return await Utilisateur.create(data);
+        return await User.create(data);
     }
 
     /**
@@ -187,6 +187,44 @@ class UtilisateurRepositories {
             return count;
         } catch (error) {
             console.error("Erreur lors du comptage des nouveaux apprenants :", error);
+            throw error;
+        }
+    }
+    async getByEmail(email) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: email
+                },
+                // On ne sélectionne que la colonne email comme dans ton code PHP
+                attributes: ['email'],
+                // Retourne un objet simple au lieu d'une instance Sequelize complète
+                raw: true
+            });
+
+            // user sera soit { email: "..." } soit null
+            return user;
+        } catch (error) {
+            console.error("Erreur lors de la récupération par email :", error);
+            throw error;
+        }
+    }
+    async deactivateUser(userId) {
+        try {
+            // .update(valeurs, conditions)
+            const [updatedRows] = await User.update(
+                { actif: 0 },
+                {
+                    where: {
+                        id: userId
+                    }
+                }
+            );
+
+            // updatedRows contient le nombre de lignes modifiées (0 ou 1)
+            return updatedRows > 0;
+        } catch (error) {
+            console.error("Erreur lors de la désactivation de l'utilisateur :", error);
             throw error;
         }
     }

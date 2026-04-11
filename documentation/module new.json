@@ -6,7 +6,7 @@
         "text": "{\n    \"cours_id\": 4,\n    \"titre\": \"module de cours 4\",\n    \"description\": \"description de module cours 4\"\n}"
     },
     "url": "{{host}}/module/new",
-    "sortOrder": 0,
+    "sortOrder": 11,
     "parameters": [],
     "pathParameters": [],
     "headers": [

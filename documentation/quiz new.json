@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "method": "POST",
+    "body": {
+        "mimeType": "application/json",
+        "text": "{ \n    \"module_id\": 6 , \n    \"titre_quiz\": \"new quiz\", \n    \"description_quiz\": \"description new quiz\", \n    \"score_minimum\": 90, \n    \"questions\": [\n        {\n            \"texte\": \"qmldskjfqmls\",\n            \"reponse_correcte\": \"sqdfqsf\",\n            \"reponse_incorrecte_1\": \"mlsqkjdfml 1\",\n            \"reponse_incorrecte_2\": \"mlsqkjdfml 2\",\n            \"reponse_incorrecte_3\": \"mlsqkjdfml 3\"\n        }\n    ] \n}"
+    },
+    "url": "{{host}}/quiz/new",
+    "sortOrder": 8,
+    "parameters": [],
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+    },
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
+}
