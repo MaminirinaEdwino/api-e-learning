@@ -7,18 +7,19 @@ class AdminFormationController {
 
     // --- LISTE GLOBALE ---
     async listGestion(req, res) {
+        console.log("teste")
+        
         try {
             const formations = await formationRepo.getAllByNom();
-            const sousFormations = await contenuRepo.getSousFormation();
+            // const sousFormations = await contenuRepo.getSousFormation();
             const inscriptions = await inscriptionRepo.getAll();
-
-            res.render('admin/gestionFormation', {
-                formations,
-                sous_formations: sousFormations,
-                inscriptions
+            
+            res.json({
+                formations: formations,
+                inscriptions: inscriptions
             });
         } catch (error) {
-            res.status(500).send("Erreur de chargement de la gestion.");
+            res.status(500).send("Erreur de chargement de la gestion."+ error);
         }
     }
 

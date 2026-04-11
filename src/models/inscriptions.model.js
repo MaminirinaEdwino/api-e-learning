@@ -6,7 +6,7 @@ const Inscription = sequelize.define('Inscription', {
     utilisateur_id: { type: DataTypes.INTEGER, allowNull: false },
     cours_id: { type: DataTypes.INTEGER, allowNull: false },
     date_inscription: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    statut_payement: { type: DataTypes.ENUM('en_attente', 'paye', 'annule'), defaultValue: 'en_attente' }
+    statut_paiement: { type: DataTypes.ENUM('en_attente', 'paye', 'annule'), defaultValue: 'en_attente' }
 }, { tableName: 'inscriptions', timestamps: false });
 
 module.exports = Inscription;

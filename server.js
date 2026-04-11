@@ -42,6 +42,9 @@ const quizRoutes = require('./src/routes/quizRoutes');
 const userRoutes = require('./src/routes/userAdminRoutes');
 const journalRoutes = require('./src/routes/journalRoutes');
 const signinRoutes = require('./src/routes/signinRoutes');
+const adminFormationRoutes = require('./src/routes/adminFormationRoutes');
+const adminForumRoutes = require('./src/routes/adminForumRoutes');
+const userAdminRoutes = require('./src/routes/userAdminRoutes');
 
 // --- 4. UTILISATION DES ROUTES ---
 app.use(authRoutes);
@@ -53,6 +56,9 @@ app.use(quizRoutes);
 app.use(userRoutes);
 app.use(journalRoutes);
 app.use(signinRoutes);
+app.use(adminFormationRoutes);
+app.use(adminForumRoutes);
+app.use(userAdminRoutes);
 
 // --- 5. GESTION DES ERREURS 404 ---
 app.use((req, res) => {

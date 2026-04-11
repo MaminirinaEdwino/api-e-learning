@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/admin/gestionuser",
-    "sortOrder": 4,
+    "url": "{{host}}/gestion/formation",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
