@@ -34,7 +34,7 @@ router.post('/sousformation/new', verifyToken, isAdmin, adminCtrl.createSousForm
 router.put('/formation/edit/:id', verifyToken, isAdmin, adminCtrl.updateFormation);
 
 // Routes de suppression
-router.get('/formation/delete/:id', verifyToken, isAdmin, async (req, res) => {
+router.delete('/formation/delete/:id', verifyToken, isAdmin, async (req, res) => {
     await formationRepo.delete(req.params.id);
     res.json({
         success: true,
@@ -42,6 +42,6 @@ router.get('/formation/delete/:id', verifyToken, isAdmin, async (req, res) => {
     });
 });
 
-router.get('/contenu/delete/:id', verifyToken, isAdmin, adminCtrl.deleteContenu);
+router.delete('/contenu/delete/:id', verifyToken, isAdmin, adminCtrl.deleteContenu);
 
 module.exports = router;
