@@ -33,7 +33,9 @@ class ContactController {
             await transporter.sendMail(mailOptions);
 
             // Redirection après succès (équivalent à header("Location: ..."))
-            res.redirect('/apropos/contact');
+            res.json({
+                message: "email send"
+            });
         } catch (error) {
             console.error("Erreur lors de l'envoi de l'email:", error);
             res.status(500).send("Une erreur est survenue lors de l'envoi du message.");

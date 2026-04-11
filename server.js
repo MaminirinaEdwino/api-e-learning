@@ -46,6 +46,7 @@ const adminFormationRoutes = require('./src/routes/adminFormationRoutes');
 const adminForumRoutes = require('./src/routes/adminForumRoutes');
 const userAdminRoutes = require('./src/routes/userAdminRoutes');
 const apprenantRoutes = require('./src/routes/apprenantRoutes');
+const contactRotues = require('./src/routes/contactRoutes');
 // --- 4. UTILISATION DES ROUTES ---
 app.use(authRoutes);
 app.use(adminRoutes);
@@ -60,6 +61,7 @@ app.use(adminFormationRoutes);
 app.use(adminForumRoutes);
 app.use(userAdminRoutes);
 app.use(apprenantRoutes);
+app.use(contactRotues);
 
 // --- 5. GESTION DES ERREURS 404 ---
 app.use((req, res) => {
