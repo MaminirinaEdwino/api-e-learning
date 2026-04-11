@@ -30,6 +30,6 @@ router.get('/cours', verifyToken, isFormateur, async (req, res) => {
 router.post('/cours/new', verifyToken, isFormateur, upload.any(), coursCtrl.createCours);
 
 router.get('/cours/formateur', verifyToken, isFormateur, coursCtrl.listForFormateur);
-router.get('/cours/delete/:id', verifyToken, isFormateur, coursCtrl.deleteCours);
+router.delete('/cours/delete/:id', verifyToken, isFormateur, coursCtrl.deleteCours);
 
 module.exports = router;

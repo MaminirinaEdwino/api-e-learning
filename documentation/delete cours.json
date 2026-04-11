@@ -1,0 +1,15 @@
+{
+    "_type": "request",
+    "method": "DELETE",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "url": "{{host}}/cours/delete/29",
+    "sortOrder": 2,
+    "parameters": [],
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+    }
+}

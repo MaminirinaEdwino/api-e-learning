@@ -119,7 +119,9 @@ class CoursController {
             // Sequelize gère généralement les DELETE CASCADE si configuré, 
             // sinon il faut appeler les repos manuellement comme dans votre PHP.
             await coursRepo.delete(id);
-            res.redirect('/cours/formateur');
+            res.json({
+                message: "delete cours"
+            });
         } catch (error) {
             res.status(500).send("Erreur suppression");
         }
