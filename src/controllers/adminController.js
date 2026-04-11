@@ -84,7 +84,7 @@ class AdminController {
         try {
 
             const users = await utilisateurRepo.getFilteredUsers(search, ['apprenant'], sort, order);
-            const formateurs = await formateurRepo.getFilteredFormateurs(search, sort, order);
+            const formateurs = await formateurRepo.getAll();
             const admins = await utilisateurRepo.getFilteredUsers(search, ['admin', 'moderator'], sort, order);
 
             res.json({ success: true, data: { users, formateurs, admins }, filters: { search, sort, order } });

@@ -23,7 +23,7 @@ const Formateur = sequelize.define('Formateur', {
     duree_estimee: DataTypes.STRING,
     type_formation: DataTypes.STRING,
     motivation: DataTypes.TEXT,
-    valeur: DataTypes.TEXT,
+    valeurs: DataTypes.TEXT,
     profil_public: DataTypes.TEXT,
     statut: { type: DataTypes.ENUM('en attente', 'verifie', 'premium', 'partenaire'), defaultValue: 'en attente' },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
