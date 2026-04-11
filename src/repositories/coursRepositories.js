@@ -33,6 +33,29 @@ class CoursRepositories {
     async getById(id) {
         return await Cours.findByPk(id);
     }
+    async getByUser(userId) {
+        try {
+            const cours = await Cours.findAll({
+                // On sélectionne les colonnes du cours (c.*)
+                include: [{
+                    model: Inscription,
+                    as: 'Inscriptions', // L'alias défini dans ton index.js
+                    where: {
+                        utilisateur_id: userId,
+                        statut_paiement: 'paye'
+                    },
+                    attributes: [] // On ne veut pas les données de l'inscription, juste filtrer par elle
+                }],
+                // raw: true permet d'avoir un tableau d'objets simples (équivalent PDO::FETCH_ASSOC)
+                raw: true
+            });
+
+            return cours;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des cours de l'utilisateur :", error);
+            throw error;
+        }
+    }
 
     // Équivalent de Update
     async update(id, data) {
@@ -86,69 +109,69 @@ class CoursRepositories {
     //     });
     // }
     async getCoursProgression(userId) {
-    try {
-        // 1. Récupérer les inscriptions payées de l'utilisateur
-        const inscriptions = await Inscription.findAll({
-            where: { utilisateur_id: userId, statut_paiement: 'paye' },
-            attributes: ['cours_id'],
-            raw: true
-        });
+        try {
+            // 1. Récupérer les inscriptions payées de l'utilisateur
+            const inscriptions = await Inscription.findAll({
+                where: { utilisateur_id: userId, statut_paiement: 'paye' },
+                attributes: ['cours_id'],
+                raw: true
+            });
 
-        if (inscriptions.length === 0) return [];
+            if (inscriptions.length === 0) return [];
 
-        const coursIds = inscriptions.map(ins => ins.cours_id);
+            const coursIds = inscriptions.map(ins => ins.cours_id);
 
-        // 2. Récupérer les cours avec leurs modules et quiz associés
-        const coursData = await Cours.findAll({
-            where: { id: coursIds },
-            attributes: ['id', 'titre'],
-            include: [{
-                model: Module,
-                as: 'Modules',
+            // 2. Récupérer les cours avec leurs modules et quiz associés
+            const coursData = await Cours.findAll({
+                where: { id: coursIds },
+                attributes: ['id', 'titre'],
                 include: [{
-                    model: Quiz,
-                    attributes: ['id', 'score_minimum']
+                    model: Module,
+                    as: 'Modules',
+                    include: [{
+                        model: Quiz,
+                        attributes: ['id', 'score_minimum']
+                    }]
                 }]
-            }]
-        });
+            });
 
-        // 3. Récupérer tous les résultats de quiz de cet utilisateur
-        const mesResultats = await ResultatQuiz.findAll({
-            where: { utilisateur_id: userId },
-            attributes: ['quiz_id', 'score'],
-            raw: true
-        });
+            // 3. Récupérer tous les résultats de quiz de cet utilisateur
+            const mesResultats = await ResultatQuiz.findAll({
+                where: { utilisateur_id: userId },
+                attributes: ['quiz_id', 'score'],
+                raw: true
+            });
 
-        // 4. Procéder au calcul de la progression en JavaScript
-        const progression = coursData.map(cours => {
-            // On récupère tous les quiz de ce cours via ses modules
-            const tousLesQuizDuCours = cours.Modules.flatMap(m => m.Quizs || []);
-            
-            const total_quiz = tousLesQuizDuCours.length;
+            // 4. Procéder au calcul de la progression en JavaScript
+            const progression = coursData.map(cours => {
+                // On récupère tous les quiz de ce cours via ses modules
+                const tousLesQuizDuCours = cours.Modules.flatMap(m => m.Quizs || []);
 
-            // On filtre les quiz réussis
-            const quiz_reussis = tousLesQuizDuCours.filter(quiz => {
-                const resultat = mesResultats.find(r => r.quiz_id === quiz.id);
-                // Un quiz est réussi si on a un résultat ET que le score est suffisant
-                return resultat && resultat.score >= quiz.score_minimum;
-            }).length;
+                const total_quiz = tousLesQuizDuCours.length;
 
-            return {
-                id: cours.id,
-                titre: cours.titre,
-                total_quiz: total_quiz,
-                quiz_reussis: quiz_reussis,
-                pourcentage: total_quiz > 0 ? Math.round((quiz_reussis / total_quiz) * 100) : 0
-            };
-        });
+                // On filtre les quiz réussis
+                const quiz_reussis = tousLesQuizDuCours.filter(quiz => {
+                    const resultat = mesResultats.find(r => r.quiz_id === quiz.id);
+                    // Un quiz est réussi si on a un résultat ET que le score est suffisant
+                    return resultat && resultat.score >= quiz.score_minimum;
+                }).length;
 
-        return progression;
+                return {
+                    id: cours.id,
+                    titre: cours.titre,
+                    total_quiz: total_quiz,
+                    quiz_reussis: quiz_reussis,
+                    pourcentage: total_quiz > 0 ? Math.round((quiz_reussis / total_quiz) * 100) : 0
+                };
+            });
 
-    } catch (error) {
-        console.error("Erreur calcul progression JS :", error);
-        throw error;
+            return progression;
+
+        } catch (error) {
+            console.error("Erreur calcul progression JS :", error);
+            throw error;
+        }
     }
-}
     // Équivalent de GetVente (Statistiques formateur)
     async getVentesByFormateur(formateur_id) {
         return await Cours.findAll({
@@ -236,6 +259,53 @@ class CoursRepositories {
             throw error;
         }
     }
+    async getCoursStatus(coursList, userId) {
+    try {
+        // 1. Extraire tous les IDs de cours de la liste
+        const coursIds = coursList.map(c => c.id);
+
+        // 2. Récupérer TOUS les modules pour ces cours en une seule fois
+        const allModules = await Module.findAll({
+            where: { cours_id: coursIds },
+            attributes: ['id', 'cours_id'],
+            raw: true
+        });
+
+        // 3. Récupérer TOUTES les complétions de l'utilisateur pour ces cours
+        const allCompletions = await Completion.findAll({
+            where: { 
+                utilisateur_id: userId,
+                cours_id: coursIds 
+            },
+            attributes: ['module_id', 'cours_id'],
+            raw: true
+        });
+
+        const coursStatuts = {};
+
+        // 4. Calculer le statut pour chaque cours en mémoire
+        coursList.forEach(course => {
+            const courseId = course.id;
+
+            // Filtrer les modules et complétions appartenant à ce cours précis
+            const modulesDuCours = allModules.filter(m => m.cours_id === courseId);
+            const completionsDuCours = allCompletions.filter(c => c.cours_id === courseId);
+
+            const totalModules = modulesDuCours.length;
+            const completedModules = completionsDuCours.length;
+
+            coursStatuts[courseId] = {
+                is_completed: totalModules > 0 && totalModules === completedModules,
+                progress: totalModules > 0 ? (completedModules / totalModules * 100) : 0
+            };
+        });
+
+        return coursStatuts;
+    } catch (error) {
+        console.error("Erreur dans getCoursStatus :", error);
+        throw error;
+    }
+}
 }
 
 module.exports = new CoursRepositories();

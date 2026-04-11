@@ -39,14 +39,14 @@ class ApprenantController {
      * Liste des cours auxquels l'utilisateur est inscrit
      */
     async mesCours(req, res) {
-        const userId = req.session.user_id;
+        const userId = req.user.id;
 
         const cours = await coursRepo.getByUser(userId);
         // On récupère le statut (payé, en attente, etc.) pour chaque cours
         const coursStatus = await coursRepo.getCoursStatus(cours, userId);
 
-        res.render('espaceApprenant/mesCours', {
-            cours,
+        res.json( {
+            cours: cours,
             cours_status: coursStatus
         });
     }
