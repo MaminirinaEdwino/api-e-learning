@@ -6,7 +6,7 @@ const Forum = sequelize.define('Forum', {
     cours_id: { type: DataTypes.INTEGER, allowNull: false },
     titre: { type: DataTypes.STRING, allowNull: false },
     description: DataTypes.TEXT,
-    created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-}, { tableName: 'forums', timestamps: false });
+    date_creation: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
+}, { tableName: 'forum', timestamps: false });
 
 module.exports = Forum;

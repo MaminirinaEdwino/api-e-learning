@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Course = sequelize.define('Course', {
-    id_cours: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     id_formateur: { type: DataTypes.INTEGER, allowNull: false },
     id_formation: { type: DataTypes.INTEGER, allowNull: false },
     id_contenu_formation: { type: DataTypes.INTEGER, allowNull: false },

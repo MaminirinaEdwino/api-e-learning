@@ -17,7 +17,7 @@ class AdminForumController {
             res.json({ forums: forums });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors de la récupération des forums.");
+            res.status(500).send("Erreur lors de la récupération des forums."+error);
         }
     }
 
