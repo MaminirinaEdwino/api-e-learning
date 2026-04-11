@@ -1,11 +1,11 @@
 {
     "_type": "request",
-    "method": "GET",
+    "method": "PUT",
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/journal",
-    "sortOrder": 3,
+    "url": "{{host}}/lecon/edit/",
+    "sortOrder": 1,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

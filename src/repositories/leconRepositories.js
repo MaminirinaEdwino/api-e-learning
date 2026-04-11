@@ -19,7 +19,9 @@ class LeconRepositories {
      * Équivalent de GetAll
      */
     async getAll() {
-        return await Lecon.findAll();
+        return await Lecon.findAll({
+            raw: true
+        });
     }
 
     /**

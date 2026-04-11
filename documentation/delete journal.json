@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/journal/delete/22",
-    "sortOrder": 2,
+    "sortOrder": 4,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

@@ -67,7 +67,12 @@ class LeconController {
                 fichier: currentFichier
             });
 
-            res.redirect('/cours/formateur');
+            res.json({
+                id: id,
+                titre: titre.trim(),
+                format: format,
+                fichier: currentFichier
+            });
 
         } catch (error) {
             console.error("Erreur mise à jour leçon:", error);
@@ -80,7 +85,7 @@ class LeconController {
         const { id } = req.params;
         try {
             const lecon = await leconRepo.getById(id);
-            
+
             // Suppression du fichier physique
             if (lecon && lecon.fichier) {
                 const filePath = path.join('./Uploads/lecons/', lecon.fichier);
@@ -94,6 +99,13 @@ class LeconController {
         } catch (error) {
             res.status(500).send("Erreur lors de la suppression.");
         }
+    }
+
+    async getAll(req, res) {
+        let lecon = await leconRepo.getAll();
+        res.json({
+            lecon: lecon
+        })
     }
 }
 

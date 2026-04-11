@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/espace/formateur/progression",
-    "sortOrder": 9,
+    "sortOrder": 11,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

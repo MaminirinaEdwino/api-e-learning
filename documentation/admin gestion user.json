@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/admin/gestionuser",
-    "sortOrder": 31,
+    "sortOrder": 33,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
