@@ -1,4 +1,5 @@
-const { Op, fn, col, literal } = require('sequelize');
+const { Op, fn, col, literal, QueryTypes } = require('sequelize');
+const sequelize = require('../config/database');
 const { Cours, Formation, ContenuFormation, Inscription, Module, Completion, User, Quiz, ResultatQuiz } = require('../models/index')
 
 class CoursRepositories {
@@ -343,6 +344,93 @@ class CoursRepositories {
         } catch (error) {
             console.error("Erreur lors de la récupération des cours du formateur :", error);
             throw error.parent;
+        }
+    }
+
+    async getCoursCount(formateurId) {
+        try {
+            // La méthode count() de Sequelize exécute un "SELECT COUNT(*) FROM cours WHERE..."
+            const totalCours = await Cours.count({
+                where: {
+                    formateur_id: formateurId
+                }
+            });
+
+            return totalCours;
+        } catch (error) {
+            console.error("Erreur lors du comptage des cours :", error);
+            throw error;
+        }
+    }
+    async getVente(formateurId) {
+        try {
+            const ventes = await Cours.findAll({
+                where: { formateur_id: formateurId },
+                attributes: [
+                    'id',
+                    'titre',
+                    'prix',
+                    // COUNT(i.id) AS inscriptions
+                    [fn('COUNT', col('Inscriptions.id')), 'inscriptions'],
+                    // SUM(c.prix) AS revenu
+                    // Note : On multiplie le prix du cours par le nombre d'inscriptions trouvées
+                    [fn('SUM', col('prix')), 'revenu']
+                ],
+                include: [{
+                    model: Inscription,
+                    as: 'Inscriptions',
+                    where: { statut_paiement: 'paye' },
+                    required: false, // Équivalent du LEFT JOIN
+                    attributes: []   // On ne veut pas les colonnes individuelles de l'inscription
+                }],
+                group: ['id', 'titre', 'prix'],
+                raw: true
+            });
+
+            return ventes;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des ventes :", error);
+            throw error;
+        }
+    }
+
+    async getApprenant(formateurId) {
+        try {
+            const sql = `
+            SELECT 
+                c.id, 
+                c.titre, 
+                u.id AS utilisateur_id, 
+                u.nom AS utilisateur_nom,
+                COUNT(DISTINCT m.id) AS total_modules,
+                COUNT(DISTINCT comp.id) AS modules_termines
+            FROM cours c
+            LEFT JOIN inscriptions i ON c.id = i.cours_id AND i.statut_paiement = 'paye'
+            LEFT JOIN utilisateurs u ON i.utilisateur_id = u.id
+            LEFT JOIN modules m ON m.cours_id = c.id
+            LEFT JOIN completions comp ON comp.module_id = m.id AND comp.utilisateur_id = u.id
+            WHERE c.formateur_id = :formateurId
+            GROUP BY c.id, c.titre, u.id, u.nom
+            HAVING u.id IS NOT NULL
+            ORDER BY c.id, u.nom
+        `;
+
+            const apprenants = await sequelize.query(sql, {
+                replacements: { formateurId: formateurId },
+                type: QueryTypes.SELECT,
+            });
+
+            // Optionnel : Ajouter le pourcentage de progression en JS pour plus de clarté
+            return apprenants.map(a => ({
+                ...a,
+                progression: a.total_modules > 0
+                    ? Math.round((a.modules_termines / a.total_modules) * 100)
+                    : 0
+            }));
+
+        } catch (error) {
+            console.error("Erreur dans getApprenant :", error);
+            throw error;
         }
     }
 }

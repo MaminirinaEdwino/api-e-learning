@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/espace/apprenant/cours",
-    "sortOrder": 8,
+    "sortOrder": 10,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

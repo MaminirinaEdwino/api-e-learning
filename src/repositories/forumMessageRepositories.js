@@ -64,6 +64,7 @@ class ForumMessageRepositories {
             include: [
                 {
                     model: User,
+                    as: "auteur",
                     attributes: [['nom', 'utilisateur_nom']]
                 },
                 {

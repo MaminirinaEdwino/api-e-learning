@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/cours",
-    "sortOrder": 2,
+    "url": "{{host}}/espace/formateur",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

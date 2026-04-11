@@ -1,3 +1,4 @@
+
 const coursRepo = require('../repositories/coursRepositories');
 const forumMessageRepo = require('../repositories/forumMessageRepositories');
 const moduleRepo = require('../repositories/moduleRepositories');
@@ -10,7 +11,7 @@ class FormateurController {
      * Dashboard du formateur : Statistiques et Notifications
      */
     async dashboard(req, res) {
-        const formateurId = req.session.formateur_id;
+        const formateurId = req.user.id;
 
         try {
             // Récupération des données de base
@@ -35,7 +36,7 @@ class FormateurController {
                 };
             });
 
-            res.render('espaceformateur/espaceformateur', {
+            res.json({
                 total_cours: totalCours,
                 ventes: ventes,
                 apprenants: apprenantsRaw,
@@ -45,7 +46,7 @@ class FormateurController {
 
         } catch (error) {
             console.error("Erreur Dashboard Formateur:", error);
-            res.status(500).send("Erreur lors du chargement du tableau de bord.");
+            res.status(500).send("Erreur lors du chargement du tableau de bord."+error);
         }
     }
 
