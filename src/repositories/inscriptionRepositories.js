@@ -147,6 +147,25 @@ class InscriptionRepositories {
             nest: true
         });
     }
+    async getEnrolledCours(utilisateurId, coursId) {
+    try {
+        const inscription = await Inscription.findOne({
+            where: {
+                utilisateur_id: utilisateurId,
+                cours_id: coursId,
+                statut_paiement: 'paye'
+            },
+            attributes: ['id'], // On ne récupère que l'ID pour optimiser la performance
+            raw: true
+        });
+
+        // Retourne true si une inscription existe, sinon false
+        return inscription !== null;
+    } catch (error) {
+        console.error("Erreur lors de la vérification de l'inscription :", error);
+        throw error;
+    }
+}
 }
 
 module.exports = new InscriptionRepositories();

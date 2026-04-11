@@ -55,7 +55,7 @@ class ApprenantController {
      * Inscription à un cours (POST)
      */
     async enroll(req, res) {
-        const userId = req.session.user_id;
+        const userId = req.user.id;
         const { cours_id, references_payement, method_payement } = req.body;
 
         try {
@@ -65,8 +65,10 @@ class ApprenantController {
             if (enrolled) {
                 // Si vous préférez JSON (décommenté dans votre PHP) :
                 // return res.json({ success: false, message: 'Déjà inscrit' });
-                req.session.error = "Vous êtes déjà inscrit à ce cours.";
-                return res.redirect(`/cours/apprenant/${cours_id}`);
+                return res.json({
+                    enrolled : false,
+                    message : "Vous êtes déjà inscrit à ce cours."
+                });
             }
 
             // 2. Création de l'inscription
@@ -78,10 +80,17 @@ class ApprenantController {
                 methode_paiement: method_payement
             });
 
-            res.redirect(`/cours/apprenant/${cours_id}`);
+            res.json({
+                enrolled: true,
+                utilisateur_id: userId,
+                cours_id: cours_id,
+                statut_paiement: 'en_attente',
+                reference_paiement: references_payement,
+                methode_paiement: method_payement
+            });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors de l'inscription.");
+            res.status(500).send("Erreur lors de l'inscription."+error);
         }
     }
 }

@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "method": "POST",
+    "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cours_id\": 22,\n    \"references_payement\": \"msqldkfj\",\n    \"method_payement\": \"Mvola\"\n}"
+    },
+    "url": "{{host}}/enroll/cours",
+    "sortOrder": 1,
+    "parameters": [],
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+    },
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
+}
