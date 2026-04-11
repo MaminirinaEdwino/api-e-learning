@@ -53,9 +53,9 @@ class AuthController {
                 if (match) {
                     const token = jwt.sign(
                         {
-                            id: user.id,
-                            role: user.role,
-                            email: user.email
+                            id: formateur.id,
+                            role: "formateur",
+                            email: formateur.email
                         }, process.env.JWT_SECRET,
                         { expiresIn: "24h" }
                     )
@@ -116,7 +116,7 @@ class AuthController {
             console.error("Auth Error:", error);
             res.status(500).json({
                 success: false,
-                message: "Une erreur serveur est survenue."
+                message: "Une erreur serveur est survenue."+ error
             });
         }
     }

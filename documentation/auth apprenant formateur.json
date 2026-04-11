@@ -3,10 +3,10 @@
     "method": "POST",
     "body": {
         "mimeType": "application/json",
-        "text": "{\n    \"email\": \"manou@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+        "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
     "url": "{{host}}/auth",
-    "sortOrder": 5,
+    "sortOrder": 6,
     "parameters": [],
     "pathParameters": [],
     "headers": [
