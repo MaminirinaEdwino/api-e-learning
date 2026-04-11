@@ -14,7 +14,7 @@ class AdminForumController {
             // On conserve cette logique si GetForGestionForum y est défini
             const forums = await formationRepo.getForGestionForum();
             
-            res.render('admin/gestionForum', { forums });
+            res.json({ forums: forums });
         } catch (error) {
             console.error(error);
             res.status(500).send("Erreur lors de la récupération des forums.");
