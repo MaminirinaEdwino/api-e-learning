@@ -21,8 +21,8 @@ const isAdmin = (req, res, next) => {
 router.post('/admin/login', adminCtrl.loginAction);
 router.get('/admin/backoffice', verifyToken, isAdmin, adminCtrl.backoffice);
 router.get('/admin/gestionuser', verifyToken, isAdmin, adminCtrl.gestionUser);
-router.get('/export/csv', isAdmin, adminCtrl.exportCsv);
-router.post('/send/code', isAdmin, adminCtrl.sendCode);
+router.get('/export/csv', verifyToken,isAdmin, adminCtrl.exportCsv);
+router.post('/send/code', verifyToken,isAdmin, adminCtrl.sendCode);
 router.post('/espace/certificat', adminCtrl.generateCertificate);
 
 module.exports = router;
