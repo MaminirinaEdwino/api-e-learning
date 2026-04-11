@@ -50,6 +50,7 @@ const contactRotues = require('./src/routes/contactRoutes');
 const formateurRoutes = require('./src/routes/formateurRoutes');
 const leconRoutes = require('./src/routes/leconRoutes');
 const moduleRoutes = require('./src/routes/moduleRoutes');
+const postRoutes = require('./src/routes/postRoutes');
 
 // --- 4. UTILISATION DES ROUTES ---
 app.use(authRoutes);
@@ -69,6 +70,7 @@ app.use(contactRotues);
 app.use(formateurRoutes);
 app.use(leconRoutes);
 app.use(moduleRoutes);
+app.use(postRoutes);
 
 // --- 5. GESTION DES ERREURS 404 ---
 app.use((req, res) => {

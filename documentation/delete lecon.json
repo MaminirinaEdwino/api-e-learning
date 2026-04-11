@@ -34,7 +34,7 @@
         ]
     },
     "url": "{{host}}/lecon/delete/7",
-    "sortOrder": 9,
+    "sortOrder": 10,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

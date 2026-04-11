@@ -1,12 +1,12 @@
 {
     "_type": "request",
-    "method": "PUT",
+    "method": "POST",
     "body": {
         "mimeType": "application/json",
-        "text": "{\n    \"titre\": \"module de cours 4 edit\",\n    \"description\": \"description de module cours 4\"\n}"
+        "text": "{\n    \"forum_id\": 3,\n    \"contenu\": \"module de cours 4\"\n}"
     },
-    "url": "{{host}}/module/edit/15",
-    "sortOrder": 3,
+    "url": "{{host}}/post/new",
+    "sortOrder": 1,
     "parameters": [],
     "pathParameters": [],
     "headers": [

@@ -6,7 +6,7 @@
         "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
     "url": "{{host}}/auth",
-    "sortOrder": 44,
+    "sortOrder": 45,
     "parameters": [],
     "pathParameters": [],
     "headers": [

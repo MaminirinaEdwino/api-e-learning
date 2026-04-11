@@ -6,7 +6,7 @@
         "text": "{ \n    \"nom\": \"nom\", \n    \"email\": \"email\", \n    \"sujet\": \"sujet\", \n    \"message\": \"message\" \n}"
     },
     "url": "{{host}}/apropos/contact",
-    "sortOrder": 26,
+    "sortOrder": 27,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
