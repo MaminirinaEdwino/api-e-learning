@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/espace/certificat",
-    "sortOrder": 21,
+    "url": "{{host}}/formation/catalogue",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": []
 }

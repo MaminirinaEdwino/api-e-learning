@@ -11,10 +11,10 @@ class FormationController {
             const formations = await formationRepo.getAll();
             
             // Récupération des cours destinés au catalogue
-            const cours = await coursRepo.getCoursCatalogue();
+            const cours = await coursRepo.getCatalogue();
 
             // Rendu de la vue avec les données (équivalent à TemplateRender::render)
-            res.render('formations/catalogue', { 
+            res.json({ 
                 formations, 
                 cours 
             });
