@@ -1,20 +1,61 @@
 const path = require('path');
 const fs = require('fs');
 const leconRepo = require('../repositories/leconRepositories');
-
+const { Lecon, Module } = require('../models');
 class LeconController {
 
     // --- AFFICHAGE DU FORMULAIRE D'ÉDITION ---
-    async renderEdit(req, res) {
-        const { id } = req.params;
+    async create(req, res) {
         try {
-            const lecon = await leconRepo.getById(id);
-            res.render('lecon/lecon', {
-                leconId: id,
-                lecon: lecon
+            const { module_id, titre, format } = req.body;
+            // 1. Validation simple des champs obligatoires
+            if (!module_id || !titre) {
+                return res.status(400).json({
+                    message: "Le module_id et le titre sont obligatoires."
+                });
+            }
+
+            // 2. Vérification optionnelle : le module parent existe-t-il ?
+            // Très utile pour éviter les erreurs de clé étrangère sur MariaDB
+            if (Module) {
+                const moduleExists = await Module.findByPk(module_id);
+                if (!moduleExists) {
+                    return res.status(404).json({
+                        message: "Le module spécifié n'existe pas."
+                    });
+                }
+            }
+
+            if (!req.file) {
+                return res.status(400).json({ message: "Veuillez uploader un fichier." });
+            }
+
+            const nouvelleLecon = await Lecon.create({
+                module_id,
+                titre,
+                format,
+                // On enregistre le chemin relatif ou le nom du fichier
+                fichier: req.file.filename 
             });
+
+            res.status(201).json({
+                message: "Leçon créée avec succès !",
+                lecon: nouvelleLecon
+            });
+
         } catch (error) {
-            res.status(404).send("Leçon introuvable.");
+            console.error("Erreur lors de l'insertion de la leçon :", error);
+
+            // Gestion spécifique des erreurs Sequelize (ex: contrainte de clé étrangère)
+            if (error.name === 'SequelizeForeignKeyConstraintError') {
+                return res.status(400).json({
+                    message: "Erreur de cohérence : le module_id est invalide."
+                });
+            }
+
+            return res.status(500).json({
+                message: "Une erreur interne est survenue lors de la création."
+            });
         }
     }
 
@@ -95,7 +136,10 @@ class LeconController {
             }
 
             await leconRepo.delete(id);
-            res.redirect('/cours/formateur');
+            res.json({
+                id: id,
+                message: "lecon deleted"
+            });
         } catch (error) {
             res.status(500).send("Erreur lors de la suppression.");
         }

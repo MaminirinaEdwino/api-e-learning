@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/espace/apprenant/progression",
-    "sortOrder": 19,
+    "sortOrder": 21,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/journal",
-    "sortOrder": 3,
+    "sortOrder": 5,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

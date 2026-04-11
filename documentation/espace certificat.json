@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/espace/certificat",
-    "sortOrder": 30,
+    "sortOrder": 32,
     "parameters": [],
     "pathParameters": []
 }

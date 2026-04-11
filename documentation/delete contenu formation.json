@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/contenu/delete/3",
-    "sortOrder": 23,
+    "sortOrder": 25,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

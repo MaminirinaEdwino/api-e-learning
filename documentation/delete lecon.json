@@ -1,12 +1,17 @@
 {
     "_type": "request",
-    "method": "PUT",
+    "method": "DELETE",
     "body": {
-        "mimeType": "multipart/form-data",
+        "mimeType": "No Body",
         "params": [
             {
+                "name": "module_id",
+                "value": "5",
+                "type": "text"
+            },
+            {
                 "name": "titre",
-                "value": "sdfqsdfqdf",
+                "value": "qsdfmlqksd",
                 "type": "text"
             },
             {
@@ -28,18 +33,13 @@
             }
         ]
     },
-    "url": "{{host}}/lecon/edit/7",
-    "sortOrder": 1,
+    "url": "{{host}}/lecon/delete/7",
+    "sortOrder": 3,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
         "type": "bearer",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkwODIwNywiZXhwIjoxNzc1OTk0NjA3fQ.FTq5QcgZs6xcU6KJd1109FTGO-6g0nDM7kb9g48odE0"
     },
-    "headers": [
-        {
-            "name": "Content-Type",
-            "value": "multipart/form-data"
-        }
-    ]
+    "headers": []
 }

@@ -6,7 +6,7 @@
         "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
     },
     "url": "{{host}}/auth",
-    "sortOrder": 21,
+    "sortOrder": 23,
     "parameters": [],
     "pathParameters": [],
     "headers": [
@@ -14,5 +14,10 @@
             "name": "Content-Type",
             "value": "application/json"
         }
-    ]
+    ],
+    "authentication": {
+        "type": "No Auth",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0",
+        "disabled": true
+    }
 }

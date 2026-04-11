@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/admin/backoffice",
-    "sortOrder": 34,
+    "sortOrder": 36,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

@@ -6,7 +6,7 @@
         "text": "{\n    \"nouveau_nom\": \"teste edit\"\n}"
     },
     "url": "{{host}}/formation/edit/16",
-    "sortOrder": 25,
+    "sortOrder": 27,
     "parameters": [],
     "pathParameters": [],
     "headers": [

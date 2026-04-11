@@ -1,12 +1,17 @@
 {
     "_type": "request",
-    "method": "PUT",
+    "method": "POST",
     "body": {
         "mimeType": "multipart/form-data",
         "params": [
             {
+                "name": "module_id",
+                "value": "5",
+                "type": "text"
+            },
+            {
                 "name": "titre",
-                "value": "sdfqsdfqdf",
+                "value": "qsdfmlqksd",
                 "type": "text"
             },
             {
@@ -28,8 +33,8 @@
             }
         ]
     },
-    "url": "{{host}}/lecon/edit/7",
-    "sortOrder": 1,
+    "url": "{{host}}/lecon/new/",
+    "sortOrder": 2,
     "parameters": [],
     "pathParameters": [],
     "authentication": {
