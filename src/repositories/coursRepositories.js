@@ -86,57 +86,69 @@ class CoursRepositories {
     //     });
     // }
     async getCoursProgression(userId) {
-        try {
-            return await Cours.findAll({
-                attributes: [
-                    'id',
-                    'titre',
-                    // On compte les IDs uniques des quiz liés au cours
-                    [fn('COUNT', fn('DISTINCT', col('Modules.Quizzes.id'))), 'total_quiz'],
+    try {
+        // 1. Récupérer les inscriptions payées de l'utilisateur
+        const inscriptions = await Inscription.findAll({
+            where: { utilisateur_id: userId, statut_paiement: 'paye' },
+            attributes: ['cours_id'],
+            raw: true
+        });
 
-                    // On compte les IDs de résultats réussis (le CASE WHEN de ton PHP)
-                    [literal(`COUNT(DISTINCT CASE 
-                    WHEN \`Modules->Quizzes->ResultatQuizzes\`.\`score\` >= \`Modules->Quizzes\`.\`score_minimum\` 
-                    THEN \`Modules->Quizzes->ResultatQuizzes\`.\`id\` 
-                    END)`), 'quiz_reussis']
-                ],
-                include: [
-                    {
-                        model: Inscription,
-                        as: 'Inscriptions', // Doit correspondre à ton index.js
-                        where: {
-                            utilisateur_id: userId,
-                            statut_paiement: 'paye'
-                        },
-                        attributes: [] // On ne veut pas les colonnes de l'inscription
-                    },
-                    {
-                        model: Module,
-                        as: 'Modules',
-                        attributes: [],
-                        include: [{
-                            model: Quiz,
-                            as: 'Quizzes',
-                            attributes: [],
-                            include: [{
-                                model: ResultatQuiz,
-                                as: 'ResultatQuizzes',
-                                where: { utilisateur_id: userId },
-                                required: false, // LEFT JOIN comme dans ton PHP
-                                attributes: []
-                            }]
-                        }]
-                    }
-                ],
-                group: ['Cours.id', 'Cours.titre'],
-                subQuery: false, // Très important pour éviter les erreurs de LIMIT/OFFSET avec GROUP BY
-                raw: true
-            });
-        } catch (error) {
-            console.error("Détails de l'erreur MariaDB :", error.parent || error);
-            throw error;
-        }
+        if (inscriptions.length === 0) return [];
+
+        const coursIds = inscriptions.map(ins => ins.cours_id);
+
+        // 2. Récupérer les cours avec leurs modules et quiz associés
+        const coursData = await Cours.findAll({
+            where: { id: coursIds },
+            attributes: ['id', 'titre'],
+            include: [{
+                model: Module,
+                as: 'Modules',
+                include: [{
+                    model: Quiz,
+                    attributes: ['id', 'score_minimum']
+                }]
+            }]
+        });
+
+        // 3. Récupérer tous les résultats de quiz de cet utilisateur
+        const mesResultats = await ResultatQuiz.findAll({
+            where: { utilisateur_id: userId },
+            attributes: ['quiz_id', 'score'],
+            raw: true
+        });
+
+        // 4. Procéder au calcul de la progression en JavaScript
+        const progression = coursData.map(cours => {
+            // On récupère tous les quiz de ce cours via ses modules
+            const tousLesQuizDuCours = cours.Modules.flatMap(m => m.Quizs || []);
+            
+            const total_quiz = tousLesQuizDuCours.length;
+
+            // On filtre les quiz réussis
+            const quiz_reussis = tousLesQuizDuCours.filter(quiz => {
+                const resultat = mesResultats.find(r => r.quiz_id === quiz.id);
+                // Un quiz est réussi si on a un résultat ET que le score est suffisant
+                return resultat && resultat.score >= quiz.score_minimum;
+            }).length;
+
+            return {
+                id: cours.id,
+                titre: cours.titre,
+                total_quiz: total_quiz,
+                quiz_reussis: quiz_reussis,
+                pourcentage: total_quiz > 0 ? Math.round((quiz_reussis / total_quiz) * 100) : 0
+            };
+        });
+
+        return progression;
+
+    } catch (error) {
+        console.error("Erreur calcul progression JS :", error);
+        throw error;
     }
+}
     // Équivalent de GetVente (Statistiques formateur)
     async getVentesByFormateur(formateur_id) {
         return await Cours.findAll({

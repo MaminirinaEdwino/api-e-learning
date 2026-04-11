@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/gestion/forum",
-    "sortOrder": 2,
+    "sortOrder": 3,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

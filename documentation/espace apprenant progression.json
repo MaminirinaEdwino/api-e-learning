@@ -1,0 +1,15 @@
+{
+    "_type": "request",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "url": "{{host}}/espace/apprenant/progression",
+    "sortOrder": 1,
+    "parameters": [],
+    "pathParameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+    }
+}
