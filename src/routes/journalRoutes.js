@@ -15,6 +15,6 @@ const isAdmin = (req, res, next) => {
 // Routes
 router.post('/notification/read', verifyToken,isAdmin, journalCtrl.markNotificationsRead);
 router.get('/journal', verifyToken,isAdmin, journalCtrl.listLogs);
-router.post('/journal/delete/:id', verifyToken,isAdmin, journalCtrl.deleteLog);
+router.delete('/journal/delete/:id', verifyToken,isAdmin, journalCtrl.deleteLog);
 
 module.exports = router;

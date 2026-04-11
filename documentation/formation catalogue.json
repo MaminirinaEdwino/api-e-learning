@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/formation/catalogue",
-    "sortOrder": 2,
+    "sortOrder": 3,
     "parameters": [],
     "pathParameters": []
 }

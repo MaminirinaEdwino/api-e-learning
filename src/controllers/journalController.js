@@ -49,7 +49,10 @@ class JournalController {
 
         try {
             await journalRepo.delete(id);
-            res.redirect('/journal');
+            res.json({
+                id: id,
+                message: "Journal deleted"
+            });
         } catch (error) {
             console.error(error);
             res.status(500).send("Erreur lors de la suppression du log.");
