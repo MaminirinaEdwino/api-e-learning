@@ -4,8 +4,8 @@
     "body": {
         "mimeType": "No Body"
     },
-    "url": "{{host}}/cours/formateur",
-    "sortOrder": 8,
+    "url": "{{host}}/espace/apprenant/forum/2",
+    "sortOrder": 2,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

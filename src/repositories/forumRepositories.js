@@ -1,4 +1,4 @@
-const {Forum, Cours} = require('../models/index')
+const { Forum, Cours } = require('../models/index')
 class ForumRepositories {
 
     /**
@@ -85,31 +85,56 @@ class ForumRepositories {
         });
     }
     async getByCours() {
-    try {
-        const forums = await Forum.findAll({
-            // On sélectionne toutes les colonnes de Forum (f.*)
-            // On inclut le modèle Cours (le JOIN)
-            include: [{
-                model: Cours,
-                attributes: ['titre'], // On ne récupère que le titre (c.titre)
-                required: true // Force un INNER JOIN (exclut les forums sans cours)
-            }],
-            // raw et nest permettent d'obtenir un format d'objet propre
-            raw: true,
-            nest: true
-        });
+        try {
+            const forums = await Forum.findAll({
+                // On sélectionne toutes les colonnes de Forum (f.*)
+                // On inclut le modèle Cours (le JOIN)
+                include: [{
+                    model: Cours,
+                    attributes: ['titre'], // On ne récupère que le titre (c.titre)
+                    required: true // Force un INNER JOIN (exclut les forums sans cours)
+                }],
+                // raw et nest permettent d'obtenir un format d'objet propre
+                raw: true,
+                nest: true
+            });
 
-        // Pour correspondre exactement à ton alias PHP "cours_titre" :
-        return forums.map(f => ({
-            ...f,
-            cours_titre: f.Cours ? f.Cours.titre : null
-        }));
+            // Pour correspondre exactement à ton alias PHP "cours_titre" :
+            return forums.map(f => ({
+                ...f,
+                cours_titre: f.Cours ? f.Cours.titre : null
+            }));
 
-    } catch (error) {
-        console.error("Erreur lors de la récupération des forums :", error);
-        throw error;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des forums :", error);
+            throw error;
+        }
     }
-}
+
+    async getFromForumCours(forumId) {
+        try {
+            const forum = await Forum.findOne({
+                where: { id: forumId },
+                include: [{
+                    model: Cours, // L'alias défini dans tes associations
+                    attributes: ['titre'] // On ne récupère que le titre du cours
+                }],
+                raw: true,
+                nest: true // Organise le titre du cours dans un sous-objet
+            });
+
+            // Formatage pour correspondre à ton PHP : { ..., cours_titre: "Nom" }
+            if (forum && forum.Cours) {
+                forum.cours_titre = forum.Cours.titre;
+                delete forum.Cours; // Optionnel : nettoie le sous-objet pour aplatir le résultat
+            }
+
+            return forum;
+        } catch (error) {
+            console.error("Erreur lors de la récupération du forum et de son cours :", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = new ForumRepositories();

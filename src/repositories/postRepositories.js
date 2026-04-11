@@ -55,31 +55,43 @@ class PostRepositories {
      * Récupère les messages d'un forum avec indicateurs (est-ce moi ? est-ce un formateur ?)
      */
     async getPostByForumUser(currentUserId, forumId) {
-        return await Post.findAll({
-            where: { forum_id: forumId },
-            attributes: {
-                include: [
-                    // COALESCE(f.nom_prenom, u.nom) AS auteur_nom
-                    [literal('COALESCE("Utilisateur->Formateur"."nom_prenom", "Utilisateur"."nom")'), 'auteur_nom'],
-                    // CASE WHEN p.auteur_id = ? THEN 1 ELSE 0 END AS is_self
-                    [literal(`CASE WHEN "Post"."auteur_id" = ${currentUserId} THEN 1 ELSE 0 END`), 'is_self'],
-                    // CASE WHEN f.id IS NOT NULL THEN 1 ELSE 0 END AS is_formateur
-                    [literal('CASE WHEN "Utilisateur->Formateur"."id" IS NOT NULL THEN 1 ELSE 0 END'), 'is_formateur']
-                ]
-            },
-            include: [{
-                model: User,
-                attributes: [], // On ne veut pas les colonnes brutes de l'user ici
+        try {
+            const posts = await Post.findAll({
+                where: { forum_id: forumId },
                 include: [{
-                    model: Formateur,
-                    attributes: [],
-                    // On simule le JOIN u.email = f.email
-                    on: literal('"Utilisateur"."email" = "Utilisateur->Formateur"."email"')
-                }]
-            }],
-            order: [['date_post', 'ASC']],
-            raw: true
-        });
+                    model: User, // Vérifie que c'est bien l'alias dans ton index.js
+                    include: [{
+                        model: Formateur,
+                        as: 'infosFormateur', // Alias défini dans tes associations
+                        required: false // LEFT JOIN
+                    }]
+                }],
+                order: [['date_post', 'ASC']]
+            });
+
+            // On transforme les résultats pour retrouver tes colonnes personnalisées
+            return posts.map(p => {
+                const user = p.Utilisateur;
+                const formateur = user ? user.infosFormateur : null;
+
+                return {
+                    id: p.id,
+                    contenu: p.contenu,
+                    date_post: p.date_post,
+                    auteur_id: p.auteur_id,
+                    // Équivalent de COALESCE(f.nom_prenom, u.nom)
+                    auteur_nom: formateur && formateur.nom_prenom ? formateur.nom_prenom : (user ? user.nom : 'Anonyme'),
+                    // Équivalent de CASE WHEN auteur_id = currentUserId
+                    is_self: p.auteur_id === parseInt(currentUserId) ? 1 : 0,
+                    // Équivalent de CASE WHEN f.id IS NOT NULL
+                    is_formateur: formateur ? 1 : 0
+                };
+            });
+
+        } catch (error) {
+            console.error("Erreur dans getPostByForumUser :", error);
+            throw error;
+        }
     }
 
     /**

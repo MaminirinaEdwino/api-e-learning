@@ -3,6 +3,12 @@ const postRepo = require('../repositories/postRepositories');
 const coursRepo = require('../repositories/coursRepositories');
 
 class ForumController {
+    async getAll(req, res){
+        let forum = await forumRepo.getAll()
+        res.json(
+             forum
+        )
+    }
     
     // --- CRÉATION D'UN FORUM ---
     async createForum(req, res) {
@@ -61,14 +67,14 @@ class ForumController {
             const forum = await forumRepo.getFromForumCours(forum_id);
             const posts = await postRepo.getPostByForumUser(user_id, forum_id);
 
-            res.render('forum/apprenantForum', {
+            res.json({
                 forum_id,
                 forum,
                 posts
             });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur chargement du forum.");
+            res.status(500).send("Erreur chargement du forum."+error);
         }
     }
 }
