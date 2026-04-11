@@ -15,14 +15,14 @@ class ApprenantController {
             const cours = await coursRepo.getCoursFormation();
             const forums = await forumRepo.getByCours();
 
-            res.render('espaceApprenant/espaceApprenant', {
-                formations,
-                cours,
-                forums
+            res.json({
+                formations:formations,
+                cours: cours,
+                forums: forums
             });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors du chargement du catalogue.");
+            res.status(500).send("Erreur lors du chargement du catalogue."+error);
         }
     }
 

@@ -1,5 +1,5 @@
 const { Op, fn, col, literal } = require('sequelize');
-const {Cours, Formation, ContenuFormation, Inscription, Module, Completion, User, Quiz, ResultatQuiz} = require('../models/index')
+const { Cours, Formation, ContenuFormation, Inscription, Module, Completion, User, Quiz, ResultatQuiz } = require('../models/index')
 
 class CoursRepositories {
 
@@ -142,6 +142,34 @@ class CoursRepositories {
             return count;
         } catch (error) {
             console.error("Erreur lors du comptage des apprenants :", error);
+            throw error;
+        }
+    }
+
+    async getCoursFormation() {
+        try {
+            const result = await Cours.findAll({
+                // On inclut le modèle Formation (le LEFT JOIN)
+                include: [{
+                    model: Formation,
+                    attributes: ['id_formation'], // On ne prend que l'ID comme dans ton SQL
+                    required: false // Force le LEFT JOIN (par défaut Sequelize fait souvent du INNER si non spécifié)
+                }],
+                // raw: true aplatit les instances Sequelize en objets JSON simples
+                // nest: true permet de garder une structure propre, mais pour coller à ton PHP, 
+                // on peut traiter le résultat juste après.
+                raw: true,
+                nest: true
+            });
+
+            // Si tu veux exactement le même format plat que PHP (c.* + f.id_formation) :
+            return result.map(item => ({
+                ...item,
+                id_formation: item.Formation ? item.Formation.id_formation : null
+            }));
+
+        } catch (error) {
+            console.error("Erreur lors de la récupération des cours et formations :", error);
             throw error;
         }
     }

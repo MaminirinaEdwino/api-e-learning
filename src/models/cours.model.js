@@ -3,9 +3,9 @@ const sequelize = require('../config/database');
 
 const Course = sequelize.define('Course', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    id_formateur: { type: DataTypes.INTEGER, allowNull: false },
-    id_formation: { type: DataTypes.INTEGER, allowNull: false },
-    id_contenu_formation: { type: DataTypes.INTEGER, allowNull: false },
+    formateur_id: { type: DataTypes.INTEGER, allowNull: false },
+    formation_id: { type: DataTypes.INTEGER, allowNull: false },
+    contenu_formation_id: { type: DataTypes.INTEGER, allowNull: false },
     titre: { type: DataTypes.STRING, allowNull: false },
     description: DataTypes.TEXT,
     prix: { type: DataTypes.DECIMAL(10, 2), defaultValue: 0.00 },

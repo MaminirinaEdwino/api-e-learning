@@ -84,6 +84,32 @@ class ForumRepositories {
             where: { cours_id: coursId }
         });
     }
+    async getByCours() {
+    try {
+        const forums = await Forum.findAll({
+            // On sélectionne toutes les colonnes de Forum (f.*)
+            // On inclut le modèle Cours (le JOIN)
+            include: [{
+                model: Cours,
+                attributes: ['titre'], // On ne récupère que le titre (c.titre)
+                required: true // Force un INNER JOIN (exclut les forums sans cours)
+            }],
+            // raw et nest permettent d'obtenir un format d'objet propre
+            raw: true,
+            nest: true
+        });
+
+        // Pour correspondre exactement à ton alias PHP "cours_titre" :
+        return forums.map(f => ({
+            ...f,
+            cours_titre: f.Cours ? f.Cours.titre : null
+        }));
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des forums :", error);
+        throw error;
+    }
+}
 }
 
 module.exports = new ForumRepositories();
