@@ -6,7 +6,7 @@
         "text": "{\n    \"id_formation\": 7,\n    \"sous_formation\": \"sousousous1\"\n}"
     },
     "url": "{{host}}/sousformation/new",
-    "sortOrder": 4,
+    "sortOrder": 6,
     "parameters": [],
     "pathParameters": [],
     "headers": [

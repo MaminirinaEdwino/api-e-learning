@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const utilisateurRepo = require('../repositories/utilisateurRepositories');
 const formateurRepo = require('../repositories/formateurRepositories');
-
+const jwt = require('jsonwebtoken');
 class AuthController {
     // Déconnexion (JSON)
     logout(req, res) {
@@ -21,9 +21,9 @@ class AuthController {
 
         // 1. Validation de base
         if (!email || !password) {
-            return res.status(400).json({ 
-                success: false, 
-                message: "Veuillez remplir tous les champs." 
+            return res.status(400).json({
+                success: false,
+                message: "Veuillez remplir tous les champs."
             });
         }
 
@@ -35,9 +35,9 @@ class AuthController {
             const timePassed = Date.now() - attempts.time;
             if (timePassed < lockoutTime) {
                 const minutesLeft = Math.ceil((lockoutTime - timePassed) / 60000);
-                return res.status(429).json({ 
-                    success: false, 
-                    message: `Trop de tentatives. Réessayez dans ${minutesLeft} minutes.` 
+                return res.status(429).json({
+                    success: false,
+                    message: `Trop de tentatives. Réessayez dans ${minutesLeft} minutes.`
                 });
             } else {
                 delete req.session.login_attempts[email];
@@ -49,14 +49,20 @@ class AuthController {
             const formateur = await formateurRepo.getForAuth(email);
             if (formateur) {
                 const dbHash = formateur.password.replace(/^\$2y\$/, "$2a$");
-                const match = await bcrypt.compare(password,dbHash);
+                const match = await bcrypt.compare(password, dbHash);
                 if (match) {
-                    delete req.session.login_attempts[email];
-                    const sessionData = this.initSession(req, 'formateur', formateur);
-                    return res.json({ 
-                        success: true, 
-                        message: "Connexion réussie (Formateur).",
-                        user: sessionData 
+                    const token = jwt.sign(
+                        {
+                            id: user.id,
+                            role: user.role,
+                            email: user.email
+                        }, process.env.JWT_SECRET,
+                        { expiresIn: "24h" }
+                    )
+                    return res.json({
+                        success: true,
+                        message: "Authentification formateur réussie",
+                        token: token
                     });
                 }
             }
@@ -65,9 +71,9 @@ class AuthController {
             const user = await utilisateurRepo.findByEmail(email);
             if (user) {
                 if (!user.dataValues.actif) {
-                    return res.status(403).json({ 
-                        success: user.actif, 
-                        message: "Votre compte est désactivé. Contactez l'administrateur." 
+                    return res.status(403).json({
+                        success: user.actif,
+                        message: "Votre compte est désactivé. Contactez l'administrateur."
                     });
                 }
                 const dbHash = user.dataValues.mot_de_passe.replace(/^\$2y\$/, "$2a$");
@@ -75,12 +81,18 @@ class AuthController {
                 const match = await bcrypt.compare(password, dbHash);
                 console.log("match", user.dataValues.mot_de_passe, password)
                 if (match) {
-                    delete req.session.login_attempts[email];
-                    const sessionData = this.initSession(req, 'apprenant', user);
-                    return res.json({ 
-                        success: true, 
-                        message: "Connexion réussie (Apprenant).",
-                        user: sessionData 
+                    const token = jwt.sign(
+                        {
+                            id: user.id,
+                            role: user.role,
+                            email: user.email
+                        }, process.env.JWT_SECRET,
+                        { expiresIn: "24h" }
+                    )
+                    return res.json({
+                        success: true,
+                        message: "Authentification apprenant réussie",
+                        token: token
                     });
                 }
             }
@@ -93,24 +105,24 @@ class AuthController {
             req.session.login_attempts[email].time = Date.now();
 
             const remaining = maxAttempts - req.session.login_attempts[email].count;
-            
-            return res.status(401).json({ 
-                success: false, 
+
+            return res.status(401).json({
+                success: false,
                 message: "Identifiants incorrects.",
                 attemptsRemaining: remaining > 0 ? remaining : 0
             });
 
         } catch (error) {
             console.error("Auth Error:", error);
-            res.status(500).json({ 
-                success: false, 
-                message: "Une erreur serveur est survenue." 
+            res.status(500).json({
+                success: false,
+                message: "Une erreur serveur est survenue."
             });
         }
     }
 
     // Helper pour initialiser la session et retourner les données publiques
-   
+
 }
 
 module.exports = new AuthController();
