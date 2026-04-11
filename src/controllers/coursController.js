@@ -89,18 +89,21 @@ class CoursController {
 
     // --- LISTE POUR LE FORMATEUR ---
     async listForFormateur(req, res) {
-        const formateurId = req.session.formateur_id;
+        const formateurId = req.user.id;
         const cours = await coursRepo.getCoursFormationContenu(formateurId);
         
         // On enrichit les données avec les modules et leçons
         for (let c of cours) {
             c.modules = await moduleRepo.getByCoursId(c.id);
-            for (let m of c.modules) {
-                m.lecons = await leconRepo.getByModuleId(m.id);
-            }
+            // for (let m of c.modules) {
+            //     console.log(m.id)
+            //     m.lecons = await leconRepo.getByModuleId(m.id);
+            // }
         }
 
-        res.render('cours/list', { cours });
+        res.json({
+            cours : cours
+        });
     }
 
     // --- SUPPRESSION ---

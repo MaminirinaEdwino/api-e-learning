@@ -260,52 +260,91 @@ class CoursRepositories {
         }
     }
     async getCoursStatus(coursList, userId) {
-    try {
-        // 1. Extraire tous les IDs de cours de la liste
-        const coursIds = coursList.map(c => c.id);
+        try {
+            // 1. Extraire tous les IDs de cours de la liste
+            const coursIds = coursList.map(c => c.id);
 
-        // 2. Récupérer TOUS les modules pour ces cours en une seule fois
-        const allModules = await Module.findAll({
-            where: { cours_id: coursIds },
-            attributes: ['id', 'cours_id'],
-            raw: true
-        });
+            // 2. Récupérer TOUS les modules pour ces cours en une seule fois
+            const allModules = await Module.findAll({
+                where: { cours_id: coursIds },
+                attributes: ['id', 'cours_id'],
+                raw: true
+            });
 
-        // 3. Récupérer TOUTES les complétions de l'utilisateur pour ces cours
-        const allCompletions = await Completion.findAll({
-            where: { 
-                utilisateur_id: userId,
-                cours_id: coursIds 
-            },
-            attributes: ['module_id', 'cours_id'],
-            raw: true
-        });
+            // 3. Récupérer TOUTES les complétions de l'utilisateur pour ces cours
+            const allCompletions = await Completion.findAll({
+                where: {
+                    utilisateur_id: userId,
+                    cours_id: coursIds
+                },
+                attributes: ['module_id', 'cours_id'],
+                raw: true
+            });
 
-        const coursStatuts = {};
+            const coursStatuts = {};
 
-        // 4. Calculer le statut pour chaque cours en mémoire
-        coursList.forEach(course => {
-            const courseId = course.id;
+            // 4. Calculer le statut pour chaque cours en mémoire
+            coursList.forEach(course => {
+                const courseId = course.id;
 
-            // Filtrer les modules et complétions appartenant à ce cours précis
-            const modulesDuCours = allModules.filter(m => m.cours_id === courseId);
-            const completionsDuCours = allCompletions.filter(c => c.cours_id === courseId);
+                // Filtrer les modules et complétions appartenant à ce cours précis
+                const modulesDuCours = allModules.filter(m => m.cours_id === courseId);
+                const completionsDuCours = allCompletions.filter(c => c.cours_id === courseId);
 
-            const totalModules = modulesDuCours.length;
-            const completedModules = completionsDuCours.length;
+                const totalModules = modulesDuCours.length;
+                const completedModules = completionsDuCours.length;
 
-            coursStatuts[courseId] = {
-                is_completed: totalModules > 0 && totalModules === completedModules,
-                progress: totalModules > 0 ? (completedModules / totalModules * 100) : 0
-            };
-        });
+                coursStatuts[courseId] = {
+                    is_completed: totalModules > 0 && totalModules === completedModules,
+                    progress: totalModules > 0 ? (completedModules / totalModules * 100) : 0
+                };
+            });
 
-        return coursStatuts;
-    } catch (error) {
-        console.error("Erreur dans getCoursStatus :", error);
-        throw error;
+            return coursStatuts;
+        } catch (error) {
+            console.error("Erreur dans getCoursStatus :", error);
+            throw error;
+        }
     }
-}
+    async getCoursFormationContenu(formateurId) {
+        try {
+            const cours = await Cours.findAll({
+                where: { formateur_id: formateurId },
+                // On sélectionne les colonnes spécifiques de la table cours
+                attributes: ['id', 'titre', 'description', 'prix', 'photo', 'niveau'],
+                include: [
+                    {
+                        model: Formation,
+                        as: 'Formation', // L'alias doit correspondre à ton index.js
+                        attributes: [['nom_formation', 'nom_theme']] // On renomme directement ici
+                    },
+                    {
+                        model: ContenuFormation,
+                        as: 'ContenuFormation',
+                        attributes: [['sous_formation', 'nom_sous_theme']]
+                    }
+                ],
+                raw: true,
+                nest: true // Organise les inclusions dans des sous-objets pour éviter les conflits
+            });
+
+            // Formatage pour obtenir exactement le même résultat plat que ton fetchAll(PDO::FETCH_ASSOC)
+            return cours.map(c => ({
+                id: c.id,
+                titre: c.titre,
+                description: c.description,
+                prix: c.prix,
+                photo: c.photo,
+                niveau: c.niveau,
+                nom_theme: c.Formation ? c.Formation.nom_theme : null,
+                nom_sous_theme: c.ContenuFormation ? c.ContenuFormation.nom_sous_theme : null
+            }));
+
+        } catch (error) {
+            console.error("Erreur lors de la récupération des cours du formateur :", error);
+            throw error.parent;
+        }
+    }
 }
 
 module.exports = new CoursRepositories();

@@ -58,7 +58,8 @@ class LeconRepositories {
      */
     async getByModuleId(moduleId) {
         return await Lecon.findAll({
-            where: { module_id: moduleId }
+            where: { module_id: moduleId },
+            raw: true
         });
     }
 
