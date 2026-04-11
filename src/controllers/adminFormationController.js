@@ -26,21 +26,25 @@ class AdminFormationController {
     // --- CRÉATION FORMATION ---
     async createFormation(req, res) {
         const { nom_formation } = req.body;
-        const userId = req.session.user_id;
-
+        const userId = req.user.id;
+        console.log(req.user.id)
         try {
             await formationRepo.insert({ nom_formation: nom_formation.trim() });
             
             // Journal d'activité
             await journalRepo.insert({
-                utilisateur_id: userId,
+                admin_id: userId,
                 action: 'Ajout Formation',
                 details: `Formation ajoutée: ${nom_formation}`
             });
 
-            res.redirect('/gestion/formation');
+            res.json({
+                utilisateur_id: userId,
+                action: 'Ajout Formation',
+                details: `Formation ajoutée: ${nom_formation}`
+            });
         } catch (error) {
-            res.status(500).send("Erreur lors de l'ajout.");
+            res.status(500).send("Erreur lors de l'ajout.\n"+error);
         }
     }
 

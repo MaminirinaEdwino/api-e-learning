@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const adminCtrl = require('../controllers/adminFormationController');
 const verifyToken = require('../middlewares/authMiddleware');
-
+const formationRepo = require('../repositories/formationRepositories');
+const contenuRepo = require('../repositories/contenuFormationRepositories');
 // Middleware de protection Admin
 const isAdmin = (req, res, next) => {
     if (req.user && req.user.role === 'admin') {

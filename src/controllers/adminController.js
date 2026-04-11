@@ -132,7 +132,7 @@ class AdminController {
             });
 
             await formateurRepo.updateCode(id, code);
-            await journalRepo.insert(req.session.user_id, 'Envoi code', `Code ${code} envoyé à ${formateur.email}`);
+            await journalRepo.insert(req.user_id, 'Envoi code', `Code ${code} envoyé à ${formateur.email}`);
 
             res.json({ success: true, message: `Code envoyé avec succès à ${formateur.email}` });
         } catch (error) {

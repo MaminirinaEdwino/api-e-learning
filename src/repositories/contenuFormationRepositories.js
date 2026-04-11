@@ -1,7 +1,7 @@
-const {ContenuFormation, Formation} = require('../models/index');
+const { ContenuFormation, Formation } = require('../models/index');
 
 class ContenuFormationRepositories {
-    
+
     // Équivalent de Insert
     async insert(data) {
         return await ContenuFormation.create({
@@ -67,17 +67,37 @@ class ContenuFormationRepositories {
             where: { id_formation: formation_id }
         });
     }
+    async getSousFormationAsJson(formation_id) {
+    try {
+        const sousFormations = await ContenuFormation.findAll({
+            // On sélectionne uniquement les colonnes nécessaires
+            attributes: ['id_contenu', 'sous_formation'],
+            where: {
+                formation_id: formation_id
+            },
+            order: [
+                ['sous_formation', 'ASC']
+            ],
+            // raw: true permet de récupérer un tableau d'objets simples (plus léger pour du JSON)
+            raw: true
+        });
 
+        return sousFormations;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des sous-formations :", error);
+        throw error;
+    }
+}
     // Équivalent de GetContenuFormation (Détails d'un contenu spécifique avec son parent)
     async getContenuWithParent(id) {
-        return await ContenuFormation.findByPk(id, {
-            include: [{
-                model: Formation,
-                attributes: ['nom_formation', 'id_formation'],
-                required: true
-            }]
-        });
-    }
+    return await ContenuFormation.findByPk(id, {
+        include: [{
+            model: Formation,
+            attributes: ['nom_formation', 'id_formation'],
+            required: true
+        }]
+    });
+}
 }
 
 module.exports = new ContenuFormationRepositories();

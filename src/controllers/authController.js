@@ -110,28 +110,7 @@ class AuthController {
     }
 
     // Helper pour initialiser la session et retourner les données publiques
-    initSession(req, type, data) {
-        req.session.logged_in = true;
-        req.session.user_type = type;
-        
-        let publicData = { role: type };
-
-        if (type === 'formateur') {
-            req.session.formateur_id = data.id;
-            req.session.formateur_nom_prenom = data.nom_prenom;
-            req.session.user_role = "formateur";
-            publicData.nom = data.nom_prenom;
-            publicData.id = data.id;
-        } else {
-            req.session.user_id = data.id;
-            req.session.user_nom = data.nom;
-            req.session.user_role = "apprenant";
-            publicData.nom = data.nom;
-            publicData.id = data.id;
-        }
-
-        return publicData;
-    }
+   
 }
 
 module.exports = new AuthController();
