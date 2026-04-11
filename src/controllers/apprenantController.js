@@ -5,7 +5,7 @@ const inscriptionRepo = require('../repositories/inscriptionRepositories');
 const Inscription = require('../models/inscriptions.model'); // Import du modèle pour l'instanciation
 
 class ApprenantController {
-    
+
     /**
      * Page d'accueil de l'espace apprenant (Catalogue)
      */
@@ -16,13 +16,13 @@ class ApprenantController {
             const forums = await forumRepo.getByCours();
 
             res.json({
-                formations:formations,
+                formations: formations,
                 cours: cours,
                 forums: forums
             });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors du chargement du catalogue."+error);
+            res.status(500).send("Erreur lors du chargement du catalogue." + error);
         }
     }
 
@@ -31,8 +31,8 @@ class ApprenantController {
      */
     async progression(req, res) {
         // Le middleware authCheckerNode gérera la redirection si non connecté
-        const cours = await coursRepo.getCoursProgression(req.session.user_id);
-        res.render('espaceApprenant/progression', { cours });
+        const cours = await coursRepo.getCoursProgression(req.user.id);
+        res.json({ cours: cours });
     }
 
     /**
@@ -40,7 +40,7 @@ class ApprenantController {
      */
     async mesCours(req, res) {
         const userId = req.session.user_id;
-        
+
         const cours = await coursRepo.getByUser(userId);
         // On récupère le statut (payé, en attente, etc.) pour chaque cours
         const coursStatus = await coursRepo.getCoursStatus(cours, userId);

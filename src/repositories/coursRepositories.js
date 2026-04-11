@@ -58,34 +58,85 @@ class CoursRepositories {
     }
 
     // Équivalent de GetCoursProgression (Calcul complexe Quiz)
+    // async getCoursProgression(userId) {
+    //     // En Node, on utilise souvent une requête brute (Query) pour ce niveau de complexité SQL
+    //     // ou on définit des associations complexes. Voici la version via Sequelize :
+    //     return await Cours.findAll({
+    //         attributes: [
+    //             'id', 'titre',
+    //             [literal('COUNT(DISTINCT modules->quiz.id)'), 'total_quiz'],
+    //             [literal('COUNT(DISTINCT CASE WHEN modules->quiz->resultats_quiz.score >= modules->quiz.score_minimum THEN modules->quiz->resultats_quiz.id END)'), 'quiz_reussis']
+    //         ],
+    //         include: [{
+    //             model: Inscription,
+    //             where: { utilisateur_id: userId, statut_paiement: 'paye' },
+    //             attributes: []
+    //         }, {
+    //             model: Module,
+    //             include: [{
+    //                 model: Quiz,
+    //                 include: [{
+    //                     model: ResultatQuiz,
+    //                     where: { utilisateur_id: userId },
+    //                     required: false
+    //                 }]
+    //             }]
+    //         }],
+    //         group: ['Cours.id', 'Cours.titre']
+    //     });
+    // }
     async getCoursProgression(userId) {
-        // En Node, on utilise souvent une requête brute (Query) pour ce niveau de complexité SQL
-        // ou on définit des associations complexes. Voici la version via Sequelize :
-        return await Cours.findAll({
-            attributes: [
-                'id', 'titre',
-                [literal('COUNT(DISTINCT modules->quiz.id)'), 'total_quiz'],
-                [literal('COUNT(DISTINCT CASE WHEN modules->quiz->resultats_quiz.score >= modules->quiz.score_minimum THEN modules->quiz->resultats_quiz.id END)'), 'quiz_reussis']
-            ],
-            include: [{
-                model: Inscription,
-                where: { utilisateur_id: userId, statut_paiement: 'paye' },
-                attributes: []
-            }, {
-                model: Module,
-                include: [{
-                    model: Quiz,
-                    include: [{
-                        model: ResultatQuiz,
-                        where: { utilisateur_id: userId },
-                        required: false
-                    }]
-                }]
-            }],
-            group: ['Cours.id', 'Cours.titre']
-        });
-    }
+        try {
+            return await Cours.findAll({
+                attributes: [
+                    'id',
+                    'titre',
+                    // On compte les IDs uniques des quiz liés au cours
+                    [fn('COUNT', fn('DISTINCT', col('Modules.Quizzes.id'))), 'total_quiz'],
 
+                    // On compte les IDs de résultats réussis (le CASE WHEN de ton PHP)
+                    [literal(`COUNT(DISTINCT CASE 
+                    WHEN \`Modules->Quizzes->ResultatQuizzes\`.\`score\` >= \`Modules->Quizzes\`.\`score_minimum\` 
+                    THEN \`Modules->Quizzes->ResultatQuizzes\`.\`id\` 
+                    END)`), 'quiz_reussis']
+                ],
+                include: [
+                    {
+                        model: Inscription,
+                        as: 'Inscriptions', // Doit correspondre à ton index.js
+                        where: {
+                            utilisateur_id: userId,
+                            statut_paiement: 'paye'
+                        },
+                        attributes: [] // On ne veut pas les colonnes de l'inscription
+                    },
+                    {
+                        model: Module,
+                        as: 'Modules',
+                        attributes: [],
+                        include: [{
+                            model: Quiz,
+                            as: 'Quizzes',
+                            attributes: [],
+                            include: [{
+                                model: ResultatQuiz,
+                                as: 'ResultatQuizzes',
+                                where: { utilisateur_id: userId },
+                                required: false, // LEFT JOIN comme dans ton PHP
+                                attributes: []
+                            }]
+                        }]
+                    }
+                ],
+                group: ['Cours.id', 'Cours.titre'],
+                subQuery: false, // Très important pour éviter les erreurs de LIMIT/OFFSET avec GROUP BY
+                raw: true
+            });
+        } catch (error) {
+            console.error("Détails de l'erreur MariaDB :", error.parent || error);
+            throw error;
+        }
+    }
     // Équivalent de GetVente (Statistiques formateur)
     async getVentesByFormateur(formateur_id) {
         return await Cours.findAll({

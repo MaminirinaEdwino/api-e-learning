@@ -11,7 +11,7 @@ const isApprenant = (req, res, next) => {
 };
 
 router.get('/espace/apprenant', verifyToken, isApprenant, apprenantCtrl.dashboard);
-router.get('/espace/apprenant/progression',verifyToken, isApprenant, apprenantCtrl.progression);
+// router.get('/espace/apprenant/progression',verifyToken, isApprenant, apprenantCtrl.progression);
 router.get('/espace/apprenant/cours',verifyToken, isApprenant, apprenantCtrl.mesCours);
 router.post('/enroll/cours', verifyToken,isApprenant, apprenantCtrl.enroll);
 
