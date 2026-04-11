@@ -50,24 +50,28 @@ class AdminFormationController {
 
     // --- CRÉATION SOUS-FORMATION ---
     async createSousFormation(req, res) {
-        const { formation_parent_id, sous_formation } = req.body;
-        const userId = req.session.user_id;
+        const { id_formation, sous_formation } = req.body;
+        const userId = req.user.id;
 
         try {
             await contenuRepo.insert({
-                formation_id: formation_parent_id,
+                id_formation: id_formation,
                 sous_formation: sous_formation.trim()
             });
 
             await journalRepo.insert({
-                utilisateur_id: userId,
+                admin_id: userId,
                 action: 'Ajout sous formation',
-                details: `Sous-formation ajoutée: ${sous_formation} (Parent ID: ${formation_parent_id})`
+                details: `Sous-formation ajoutée: ${sous_formation} (Parent ID: ${id_formation})`
             });
 
-            res.redirect('/gestion/formation');
+            res.json({
+                admin_id: userId,
+                action: 'Ajout sous formation',
+                details: `Sous-formation ajoutée: ${sous_formation} (Parent ID: ${id_formation})`
+            });
         } catch (error) {
-            res.status(500).send("Erreur sous-formation.");
+            res.status(500).send("Erreur sous-formation.\n"+error);
         }
     }
 

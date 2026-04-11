@@ -1,13 +1,20 @@
 {
     "_type": "request",
-    "method": "GET",
+    "method": "POST",
     "body": {
-        "mimeType": "No Body"
+        "mimeType": "application/json",
+        "text": "{\n    \"id_formation\": 7,\n    \"sous_formation\": \"sousousous1\"\n}"
     },
-    "url": "{{host}}/gestion/formation/16",
-    "sortOrder": 3,
+    "url": "{{host}}/sousformation/new",
+    "sortOrder": 0,
     "parameters": [],
     "pathParameters": [],
+    "headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ],
     "authentication": {
         "type": "bearer",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"

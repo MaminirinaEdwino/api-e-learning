@@ -5,7 +5,7 @@ class ContenuFormationRepositories {
     // Équivalent de Insert
     async insert(data) {
         return await ContenuFormation.create({
-            id_formation: data.id_formation,
+            formation_id: data.id_formation,
             sous_formation: data.sous_formation
         });
     }
