@@ -26,14 +26,14 @@ class ContenuFormationRepositories {
             id_formation: data.id_formation,
             sous_formation: data.sous_formation
         }, {
-            where: { id_contenu_formation: id }
+            where: { id_contenu: id }
         });
     }
 
     // Équivalent de Delete
     async delete(id) {
         return await ContenuFormation.destroy({
-            where: { id_contenu_formation: id }
+            where: { id_contenu: id }
         });
     }
 

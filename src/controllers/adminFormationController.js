@@ -109,7 +109,7 @@ class AdminFormationController {
             await contenuRepo.delete(id);
             res.redirect(`/gestion/formation/${parentId}`);
         } catch (error) {
-            res.status(500).send("Erreur suppression.");
+            res.status(500).send("Erreur suppression.\n"+error);
         }
     }
 }
