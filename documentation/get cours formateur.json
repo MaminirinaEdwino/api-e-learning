@@ -5,7 +5,7 @@
         "mimeType": "No Body"
     },
     "url": "{{host}}/cours/formateur",
-    "sortOrder": 8,
+    "sortOrder": 9,
     "parameters": [],
     "pathParameters": [],
     "authentication": {

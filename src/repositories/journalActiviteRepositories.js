@@ -1,6 +1,6 @@
 const { Op, fn, col, literal } = require('sequelize');
 
-const {JournalActivite, User} = require('../models/index')
+const { JournalActivite, User } = require('../models/index')
 
 class JournalActiviteRepositories {
 
@@ -137,6 +137,21 @@ class JournalActiviteRepositories {
             raw: true,
             nest: true
         });
+    }
+    async markRead(userId) {
+        try {
+            // .create() génère automatiquement le "INSERT INTO journal_activite ..."
+            await JournalActivite.create({
+                admin_id: userId,
+                action: 'Marquer notifications comme lues',
+                details: 'Notifications des dernières 24 heures'
+            });
+
+            return true;
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement dans le journal :", error);
+            throw error;
+        }
     }
 }
 

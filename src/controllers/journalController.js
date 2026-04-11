@@ -7,14 +7,14 @@ class JournalController {
      */
     async markNotificationsRead(req, res) {
         try {
-            req.session.notifications_read = true;
+            await journalRepo.markRead(req.user.id);
             
-            await journalRepo.markRead();
-            
-            res.redirect('/admin/backoffice');
+            res.json({
+                message: "Notification read"
+            });
         } catch (error) {
             console.error(error);
-            res.status(500).send("Erreur lors de la mise à jour des notifications.");
+            res.status(500).send("Erreur lors de la mise à jour des notifications."+error);
         }
     }
 
