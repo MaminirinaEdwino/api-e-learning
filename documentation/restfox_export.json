@@ -5,10 +5,177 @@
             "_type": "request",
             "method": "POST",
             "body": {
+                "mimeType": "No Body",
+                "text": "{\n    \"deactivate_user_id\": 5\n}"
+            },
+            "url": "{{host}}/user/activate/5",
+            "sortOrder": 1,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "jtBZ0-YH01vcp2-aGB_Fa",
+            "parentId": null,
+            "name": "activate user",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/admin/backoffice",
+            "sortOrder": 54,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E",
+                "prefix": ""
+            },
+            "_id": "nIJHapSCUXoemVXZ_PG6U",
+            "parentId": null,
+            "name": "admin backoffice",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/admin/gestionuser",
+            "sortOrder": 53,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "_eKk7HXWBjABwJb3w5WKs",
+            "parentId": null,
+            "name": "admin gestion user",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+            },
+            "url": "{{host}}/admin/login",
+            "sortOrder": 55,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "No Auth"
+            },
+            "_id": "TX33Vh0Ay4nZ5rHH0EDcy",
+            "parentId": null,
+            "name": "adminlogin",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
                 "mimeType": "application/json",
                 "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
             },
             "url": "{{host}}/auth",
+            "sortOrder": 41,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "No Auth",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0",
+                "disabled": true
+            },
+            "_id": "eLHop-Sfh5dbYfwOwQjLS",
+            "parentId": null,
+            "name": "auth apprenant formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{ \n    \"nom_prenom\": \"qsdmflqkjsd\",\n    \"email\": \"ezm@gmail.com\", \n    \"password\": \"administrateur\", \n    \"confirm_password\": \"administrateur\",\n    \"entryCode\": 123456 \n}"
+            },
+            "url": "{{host}}/signin/formateur",
+            "sortOrder": 4,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "x7gPyFPrvQoykCv0AyjEd",
+            "parentId": null,
+            "name": "confirm formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{ \n    \"nom\": \"nom\", \n    \"email\": \"email\", \n    \"sujet\": \"sujet\", \n    \"message\": \"message\" \n}"
+            },
+            "url": "{{host}}/apropos/contact",
+            "sortOrder": 38,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "-wqlgXA7moMOMUP6P9RJ9",
+            "parentId": null,
+            "name": "contact mail",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"deactivate_user_id\": 5\n}"
+            },
+            "url": "{{host}}/user/deactivate",
             "sortOrder": 0,
             "parameters": [],
             "pathParameters": [],
@@ -18,7 +185,657 @@
                     "value": "application/json"
                 }
             ],
-            "_id": "xXxaDxz7FKLIc7tWxTSgu",
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "e3AUZEDDyQB5MtUEbMkjL",
+            "parentId": null,
+            "name": "deativate user",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/contenu/delete/3",
+            "sortOrder": 43,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "oN3Jwi1N9fxFJS7agl5ol",
+            "parentId": null,
+            "name": "delete contenu formation",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/cours/delete/29",
+            "sortOrder": 34,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "iUDDwTaPgWYmmfzrrNdoY",
+            "parentId": null,
+            "name": "delete cours",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/formation/delete/17",
+            "sortOrder": 44,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "tnGW0gwEVXjHkIY-jH-52",
+            "parentId": null,
+            "name": "delete formation",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/journal/delete/22",
+            "sortOrder": 24,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "_uGWQ3qvuyXCeD6UpRruv",
+            "parentId": null,
+            "name": "delete journal",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body",
+                "params": [
+                    {
+                        "name": "module_id",
+                        "value": "5",
+                        "type": "text"
+                    },
+                    {
+                        "name": "titre",
+                        "value": "qsdfmlqksd",
+                        "type": "text"
+                    },
+                    {
+                        "name": "format",
+                        "value": "pdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "fichier",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    }
+                ]
+            },
+            "url": "{{host}}/lecon/delete/7",
+            "sortOrder": 21,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkwODIwNywiZXhwIjoxNzc1OTk0NjA3fQ.FTq5QcgZs6xcU6KJd1109FTGO-6g0nDM7kb9g48odE0"
+            },
+            "headers": [],
+            "_id": "e7EPprdtnwtUYkwrvu7nK",
+            "parentId": null,
+            "name": "delete lecon",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body",
+                "text": "{\n    \"deactivate_user_id\": 5\n}"
+            },
+            "url": "{{host}}/user/delete/6",
+            "sortOrder": 2,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "J-3ZO7fZRHve-y3Z6Q550",
+            "parentId": null,
+            "name": "delete user",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"cours_id\": 22,\n    \"references_payement\": \"msqldkfj\",\n    \"method_payement\": \"Mvola\"\n}"
+            },
+            "url": "{{host}}/enroll/cours",
+            "sortOrder": 37,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "o3FG1zp87xqsl-Uv3PRf1",
+            "parentId": null,
+            "name": "enroll cours",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/apprenant/cours",
+            "sortOrder": 40,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+            },
+            "_id": "B6nWK5MHBECfCMpB02rMV",
+            "parentId": null,
+            "name": "espace apprenant cours",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/apprenant/forum/2",
+            "sortOrder": 27,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "4iQ8wJSwy2mn-4f4UE-Ri",
+            "parentId": null,
+            "name": "espace apprenant forum id",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/apprenant/progression",
+            "sortOrder": 39,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+            },
+            "_id": "F5SWfZEVzfWF6CWzCg-Mh",
+            "parentId": null,
+            "name": "espace apprenant progression",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/apprenant/",
+            "sortOrder": 36,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFwcHJlbmFudCIsImVtYWlsIjoibWFub3VAZ21haWwuY29tIiwiaWF0IjoxNzc1ODg2ODg0LCJleHAiOjE3NzU5NzMyODR9.MQB-MEFgw9GgPy2mYfyKFxTlhr9SZtnqISauoIWKFfY"
+            },
+            "_id": "jkgYR6R6OGIidAqIw3-PP",
+            "parentId": null,
+            "name": "espace apprenant",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/certificat",
+            "sortOrder": 50,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "7cFdMQPg5U9Cr2h5dl748",
+            "parentId": null,
+            "name": "espace certificat",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/formateur/progression",
+            "sortOrder": 31,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "P_0nU6WFTXBeB3kiWVMZE",
+            "parentId": null,
+            "name": "espace formateur progression",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/espace/formateur",
+            "sortOrder": 30,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "BlrEl4uTJrjLARIDVESdV",
+            "parentId": null,
+            "name": "espace formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/export/csv",
+            "sortOrder": 52,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "FFJbBSJSpouTqbCbwRXfI",
+            "parentId": null,
+            "name": "export csv",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/formation/catalogue",
+            "sortOrder": 25,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "lW-yLCJPmRxmZgQSI_jmh",
+            "parentId": null,
+            "name": "formation catalogue",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"nouveau_nom\": \"teste edit\"\n}"
+            },
+            "url": "{{host}}/formation/edit/16",
+            "sortOrder": 45,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "pqB4cM06EtQz9IPTWDGVS",
+            "parentId": null,
+            "name": "formation edit",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/forum/cours/4",
+            "sortOrder": 26,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "6GSygTWxG3KVSWKP_ESK9",
+            "parentId": null,
+            "name": "forum cours by id",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"titre\": \"titre foqsdmlf\",\n    \"description\": \"qmsldkjf\",\n    \"cours_id\": 4\n}"
+            },
+            "url": "{{host}}/forum/new",
+            "sortOrder": 29,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "YmY72i3X4zomxlcxlzc39",
+            "parentId": null,
+            "name": "forum new",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/gestion/forum",
+            "sortOrder": 42,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "sVdj7pCG3lEVSH7HwfNGR",
+            "parentId": null,
+            "name": "gestion forum",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/gestion/formation/16",
+            "sortOrder": 49,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "SY_-OXOoAr7OvHG7o48To",
+            "parentId": null,
+            "name": "gestionformation by id",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/gestion/formation",
+            "sortOrder": 48,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "CynpKVHA6YQhY28AaFQSk",
+            "parentId": null,
+            "name": "gestionformation",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/cours/formateur",
+            "sortOrder": 33,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "nAQOo5wqvTCSjIxz3ZIup",
+            "parentId": null,
+            "name": "get cours formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/cours",
+            "sortOrder": 32,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "QUcU1EImjy5GXat7o-4MR",
+            "parentId": null,
+            "name": "get cours",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/forum",
+            "sortOrder": 28,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "_id": "lKZ051nqSkYj7ayf4cI2F",
+            "parentId": null,
+            "name": "get forum",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/journal",
+            "sortOrder": 23,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "gL1n_hA1TC_JHT_I2D3nV",
+            "parentId": null,
+            "name": "get journal",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/lecon",
+            "sortOrder": 22,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "PHdD4Tar2lZzGXsLMpDXo",
+            "parentId": null,
+            "name": "get lecon",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "PUT",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "titre",
+                        "value": "sdfqsdfqdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "format",
+                        "value": "pdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "fichier",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    }
+                ]
+            },
+            "url": "{{host}}/lecon/edit/7",
+            "sortOrder": 19,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkwODIwNywiZXhwIjoxNzc1OTk0NjA3fQ.FTq5QcgZs6xcU6KJd1109FTGO-6g0nDM7kb9g48odE0"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "_id": "5BAaA2fnDOAc3tE-rLEUZ",
+            "parentId": null,
+            "name": "lecon edit",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+            },
+            "url": "{{host}}/auth",
+            "sortOrder": 56,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "J38ezrcxD5PYRzwWfuxif",
             "parentId": null,
             "name": "login",
             "workspaceId": "bwVi7-XRvtYteksWouFbf",
@@ -31,12 +848,772 @@
                 "mimeType": "No Body"
             },
             "url": "{{host}}/logout",
-            "sortOrder": 0,
+            "sortOrder": 57,
             "parameters": [],
             "pathParameters": [],
-            "_id": "j9kpNzSNVALg938teLbWU",
+            "_id": "7_-soyA4E8nBOGf_0MCOm",
             "parentId": null,
             "name": "logout",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"cours_id\": 4,\n    \"module_id\": 15,\n    \"is_checked\": true\n}"
+            },
+            "url": "{{host}}/module/complete",
+            "sortOrder": 13,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "YQhRfkExgM2ikZc5UieVp",
+            "parentId": null,
+            "name": "module complete",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body",
+                "text": "{\n    \"cours_id\": 4,\n    \"titre\": \"module de cours 4\",\n    \"description\": \"description de module cours 4\"\n}"
+            },
+            "url": "{{host}}/module/delete/15",
+            "sortOrder": 16,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "t-NR3AeFy8O1Wq-BS5Uvl",
+            "parentId": null,
+            "name": "module delete",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"titre\": \"module de cours 4 edit\",\n    \"description\": \"description de module cours 4\"\n}"
+            },
+            "url": "{{host}}/module/edit/15",
+            "sortOrder": 14,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "5tz6T5m7gETSZaB_5Bfh7",
+            "parentId": null,
+            "name": "module edit",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body",
+                "text": "{\n    \"cours_id\": 4,\n    \"titre\": \"module de cours 4\",\n    \"description\": \"description de module cours 4\"\n}"
+            },
+            "url": "{{host}}/module/cours/2",
+            "sortOrder": 17,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "FYzjbtnuRDaWP9yajSNqQ",
+            "parentId": null,
+            "name": "module get by id",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body",
+                "text": "{\n    \"cours_id\": 4,\n    \"titre\": \"module de cours 4\",\n    \"description\": \"description de module cours 4\"\n}"
+            },
+            "url": "{{host}}/module/",
+            "sortOrder": 15,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "0G7l_h_4pRnvO_ORonMpW",
+            "parentId": null,
+            "name": "module get",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"cours_id\": 4,\n    \"titre\": \"module de cours 4\",\n    \"description\": \"description de module cours 4\"\n}"
+            },
+            "url": "{{host}}/module/new",
+            "sortOrder": 11,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "7WD5cOxJxk7vsZ00ZJYze",
+            "parentId": null,
+            "name": "module new",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "formation_id",
+                        "value": "16",
+                        "type": "text"
+                    },
+                    {
+                        "name": "contenu_formation_id",
+                        "value": "2",
+                        "type": "text"
+                    },
+                    {
+                        "name": "titre_cours",
+                        "value": "teste apidf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "description_cours",
+                        "value": "desrsqmlkfd",
+                        "type": "text"
+                    },
+                    {
+                        "name": "prix_cours",
+                        "value": "20",
+                        "type": "text"
+                    },
+                    {
+                        "name": "niveau_cours",
+                        "value": "Debutant",
+                        "type": "text"
+                    },
+                    {
+                        "name": "modules",
+                        "value": "[{\"titre\": \"titre\", \"description\":\"description\"}]",
+                        "type": "text"
+                    },
+                    {
+                        "name": "photo_cours",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    }
+                ]
+            },
+            "url": "{{host}}/cours/new",
+            "sortOrder": 35,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTg5MTYzMSwiZXhwIjoxNzc1OTc4MDMxfQ.8ZXlD6JcqmxW455V5JhV3kQBwUQfaXE6zmMRMqhWLb0"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "_id": "Ma53UXaRFzJzPqdOwJWVi",
+            "parentId": null,
+            "name": "new cours",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"nom_formation\":\"teste lave be sdfdtydf\"\n}"
+            },
+            "url": "{{host}}/formation/new",
+            "sortOrder": 47,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "qOzCekBOO_HCL22_g1Pqw",
+            "parentId": null,
+            "name": "newformation",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/notification/read",
+            "sortOrder": 18,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU5MDYxODgsImV4cCI6MTc3NTk5MjU4OH0.33sVNGCA53Dywu4XOtOVqTtNNA0acKG10WkdXJvNs_o"
+            },
+            "_id": "4Nig2tTViSOXXJpipIlrY",
+            "parentId": null,
+            "name": "notification read",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "module_id",
+                        "value": "5",
+                        "type": "text"
+                    },
+                    {
+                        "name": "titre",
+                        "value": "qsdfmlqksd",
+                        "type": "text"
+                    },
+                    {
+                        "name": "format",
+                        "value": "pdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "fichier",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    }
+                ]
+            },
+            "url": "{{host}}/lecon/new/",
+            "sortOrder": 20,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkwODIwNywiZXhwIjoxNzc1OTk0NjA3fQ.FTq5QcgZs6xcU6KJd1109FTGO-6g0nDM7kb9g48odE0"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "_id": "yWLTrHM_Q7zSFbRYajAd9",
+            "parentId": null,
+            "name": "post lecon",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"forum_id\": 3,\n    \"contenu\": \"module de cours 4\"\n}"
+            },
+            "url": "{{host}}/post/new",
+            "sortOrder": 12,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMDUzMiwiZXhwIjoxNzc1OTk2OTMyfQ.Y0ntWM-NdWBROzVwxcru9OTPb_TfI3Jn9WPYuFOPJTQ"
+            },
+            "_id": "alDgYu2L2W6TJux5D5Rhj",
+            "parentId": null,
+            "name": "post new",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "nom_prenom",
+                        "value": "qsdmflqkjsd",
+                        "type": "text"
+                    },
+                    {
+                        "name": "email",
+                        "value": "ezm@gmail.com",
+                        "type": "text"
+                    },
+                    {
+                        "name": "telephone",
+                        "value": "343898934",
+                        "type": "text"
+                    },
+                    {
+                        "name": "ville_pays",
+                        "value": "MDG",
+                        "type": "text"
+                    },
+                    {
+                        "name": "linkedin",
+                        "value": "link",
+                        "type": "text"
+                    },
+                    {
+                        "name": "intitule_metier",
+                        "value": "qsdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "experience_formation",
+                        "value": "qsdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "detail_experience",
+                        "value": "qdsf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "cv",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    },
+                    {
+                        "name": "categories",
+                        "value": "qsdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "autre_domaine",
+                        "value": "qsdf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "titre_cours",
+                        "value": "qdsf",
+                        "type": "text"
+                    },
+                    {
+                        "name": "objectif",
+                        "value": "mldlkqlk",
+                        "type": "text"
+                    },
+                    {
+                        "name": "public_cible",
+                        "value": "skskdldm",
+                        "type": "text"
+                    },
+                    {
+                        "name": "detail_complementaire",
+                        "value": "qmsldmqslkd",
+                        "type": "text"
+                    },
+                    {
+                        "name": "formats",
+                        "value": "qsdwx;w,xcn;:",
+                        "type": "text"
+                    },
+                    {
+                        "name": "format_autre",
+                        "value": "zeapoiruaoezir",
+                        "type": "text"
+                    },
+                    {
+                        "name": "duree_estimee",
+                        "value": "qmsldkjfqmldsk",
+                        "type": "text"
+                    },
+                    {
+                        "name": "type_formation",
+                        "value": "qsdlkjqmlskdn",
+                        "type": "text"
+                    },
+                    {
+                        "name": "motivation",
+                        "value": "dmqlskdfjmqlsdk",
+                        "type": "text"
+                    },
+                    {
+                        "name": "valeurs",
+                        "value": "azeroiauezrpo",
+                        "type": "text"
+                    },
+                    {
+                        "name": "profil_public",
+                        "value": "qsdfmlkjqsdfj",
+                        "type": "text"
+                    }
+                ]
+            },
+            "url": "{{host}}/signin/postuler",
+            "sortOrder": 6,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "_id": "HKQdJ9hbfUMVQaFXYu0MU",
+            "parentId": null,
+            "name": "postuler formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "No Body",
+                "text": "{ \n    \"module_id\": 6 , \n    \"titre_quiz\": \"new quiz\", \n    \"description_quiz\": \"description new quiz\", \n    \"score_minimum\": 90, \n    \"questions\": [\n        {\n            \"texte\": \"qmldskjfqmls\",\n            \"reponse_correcte\": \"sqdfqsf\",\n            \"reponse_incorrecte_1\": \"mlsqkjdfml 1\",\n            \"reponse_incorrecte_2\": \"mlsqkjdfml 2\",\n            \"reponse_incorrecte_3\": \"mlsqkjdfml 3\"\n        }\n    ] \n}"
+            },
+            "url": "{{host}}/quiz/formateur/delete/8",
+            "sortOrder": 9,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+            },
+            "headers": [],
+            "_id": "4f0zF7spkBHraD4HnuJoX",
+            "parentId": null,
+            "name": "quiz delete",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{ \n    \"module_id\": 6 , \n    \"titre_quiz\": \"new quiz edit\", \n    \"description_quiz\": \"description new quiz\", \n    \"score_minimum\": 90, \n    \"questions\": [\n        {\n            \"texte\": \"qmldskjfqmls\",\n            \"reponse_correcte\": \"sqdfqsf\",\n            \"reponse_incorrecte_1\": \"mlsqkjdfml 1\",\n            \"reponse_incorrecte_2\": \"mlsqkjdfml 2\",\n            \"reponse_incorrecte_3\": \"mlsqkjdfml 3\"\n        }\n    ] \n}"
+            },
+            "url": "{{host}}/quiz/edit/7",
+            "sortOrder": 10,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "PugXEcYt604bowJpX8qAW",
+            "parentId": null,
+            "name": "quiz edit",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/quiz/formateur",
+            "sortOrder": 7,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+            },
+            "_id": "r5S71s5NiyMFEvp5KkFBs",
+            "parentId": null,
+            "name": "quiz formateur",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{ \n    \"module_id\": 6 , \n    \"titre_quiz\": \"new quiz\", \n    \"description_quiz\": \"description new quiz\", \n    \"score_minimum\": 90, \n    \"questions\": [\n        {\n            \"texte\": \"qmldskjfqmls\",\n            \"reponse_correcte\": \"sqdfqsf\",\n            \"reponse_incorrecte_1\": \"mlsqkjdfml 1\",\n            \"reponse_incorrecte_2\": \"mlsqkjdfml 2\",\n            \"reponse_incorrecte_3\": \"mlsqkjdfml 3\"\n        }\n    ] \n}"
+            },
+            "url": "{{host}}/quiz/new",
+            "sortOrder": 8,
+            "parameters": [],
+            "pathParameters": [],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImZvcm1hdGV1ciIsImVtYWlsIjoiaGFyQGdtYWlsLmNvbSIsImlhdCI6MTc3NTkxMjYxNywiZXhwIjoxNzc1OTk5MDE3fQ.EgvnECL-fzexUvSy8fWzBlU644T4jCOlsKf8XxaWR-E"
+            },
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "_id": "5bK02IWcxrd2Yg5Q3I4hj",
+            "parentId": null,
+            "name": "quiz new",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "exportedFrom": "Restfox-1.0.0",
+            "collection": [
+                {
+                    "_type": "request",
+                    "method": "POST",
+                    "body": {
+                        "mimeType": "application/json",
+                        "text": "{\n    \"email\": \"har@gmail.com\",\n    \"password\": \"administrateur\"\n}"
+                    },
+                    "url": "{{host}}/auth",
+                    "sortOrder": 0,
+                    "parameters": [],
+                    "pathParameters": [],
+                    "headers": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "_id": "xXxaDxz7FKLIc7tWxTSgu",
+                    "parentId": null,
+                    "name": "login",
+                    "workspaceId": "bwVi7-XRvtYteksWouFbf",
+                    "plugins": []
+                },
+                {
+                    "_type": "request",
+                    "method": "GET",
+                    "body": {
+                        "mimeType": "No Body"
+                    },
+                    "url": "{{host}}/logout",
+                    "sortOrder": 0,
+                    "parameters": [],
+                    "pathParameters": [],
+                    "_id": "j9kpNzSNVALg938teLbWU",
+                    "parentId": null,
+                    "name": "logout",
+                    "workspaceId": "bwVi7-XRvtYteksWouFbf",
+                    "plugins": []
+                }
+            ],
+            "environments": [
+                {
+                    "name": "Default",
+                    "environment": {
+                        "host": "http://localhost:3000"
+                    }
+                }
+            ],
+            "sortOrder": 58,
+            "_id": "apEIr-8IN-Ai5FnjlVPfi",
+            "parentId": null,
+            "name": "restfox_export",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/send/code",
+            "sortOrder": 51,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "u-K1HEwYQfNQYEkoaOOsw",
+            "parentId": null,
+            "name": "sendcode admin",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "nom",
+                        "value": "qsmldkfj",
+                        "type": "text"
+                    },
+                    {
+                        "name": "email",
+                        "value": "eded@gmail.com",
+                        "type": "text"
+                    },
+                    {
+                        "name": "password",
+                        "value": "administrateur",
+                        "type": "text"
+                    },
+                    {
+                        "name": "pays",
+                        "value": "mada",
+                        "type": "text"
+                    },
+                    {
+                        "name": "langue",
+                        "value": "MG",
+                        "type": "text"
+                    },
+                    {
+                        "name": "type_cours",
+                        "value": "facile",
+                        "type": "text"
+                    },
+                    {
+                        "name": "niveau_formation",
+                        "value": "debutant",
+                        "type": "text"
+                    },
+                    {
+                        "name": "photo",
+                        "value": "",
+                        "type": "file",
+                        "files": [
+                            {}
+                        ]
+                    }
+                ]
+            },
+            "url": "{{host}}/signin/apprenant",
+            "sortOrder": 5,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "_id": "bcLppjyLpjkshx2NedLik",
+            "parentId": null,
+            "name": "signin apprenant",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "GET",
+            "body": {
+                "mimeType": "No Body"
+            },
+            "url": "{{host}}/sousformation/16",
+            "sortOrder": 3,
+            "parameters": [],
+            "pathParameters": [],
+            "_id": "hO56yGgGPRs1BEzNXN0DR",
+            "parentId": null,
+            "name": "sous formation by id",
+            "workspaceId": "bwVi7-XRvtYteksWouFbf",
+            "plugins": []
+        },
+        {
+            "_type": "request",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"id_formation\": 7,\n    \"sous_formation\": \"sousousous1\"\n}"
+            },
+            "url": "{{host}}/sousformation/new",
+            "sortOrder": 46,
+            "parameters": [],
+            "pathParameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NzU4Nzk0NjcsImV4cCI6MTc3NTk2NTg2N30.zIpA8dNqPxgXVfwihnlTm7rV_iShnZalj_0h0OaMa4E"
+            },
+            "_id": "jcR553wSjQuiZ4fEfXYrs",
+            "parentId": null,
+            "name": "sous formation new",
             "workspaceId": "bwVi7-XRvtYteksWouFbf",
             "plugins": []
         }
@@ -48,6 +1625,5 @@
                 "host": "http://localhost:3000"
             }
         }
-    ],
-    "sortOrder": 58
+    ]
 }

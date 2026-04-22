@@ -22,6 +22,10 @@ data.collection.forEach(item => {
                 markdown += `- **${h.name}**: ${h.value}\n`;
             });
         }
+        if (item.authentication) {
+            markdown += `### Authentication\n`;
+            markdown += `#### type : ${item.authentication.type} token`
+        }
         
         markdown += `\n---\n`;
     }
